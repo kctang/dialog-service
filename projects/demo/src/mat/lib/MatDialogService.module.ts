@@ -6,20 +6,22 @@ import { AngularMaterialModule } from '../../AngularMaterial.module'
 import { AngularMdcModule } from '../../AngularMdc.module'
 import { AlertComponent } from './mat/Alert.component'
 import { MatDialogService } from './MatDialogService'
+import { ProgressComponent } from './mat/Progress.component'
+import { ConfirmComponent } from './mat/Confirm.component'
 
 @NgModule({
   declarations: [
     AlertComponent,
-    // ConfirmComponent,
+    ConfirmComponent,
     // FormComponent,
-    // ProgressComponent,
+    ProgressComponent,
     // FormFieldComponent
   ],
   entryComponents: [
     AlertComponent,
-    // ConfirmComponent,
+    ConfirmComponent,
     // FormComponent,
-    // ProgressComponent,
+    ProgressComponent,
     // FormFieldComponent
   ],
   imports: [

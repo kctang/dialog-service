@@ -3,8 +3,10 @@ import { EMPTY, Observable } from 'rxjs'
 import { DialogService } from './DialogService'
 import { DialogFormField } from './models/DialogFormField'
 import { MatDialog } from '@angular/material'
-import { map } from 'rxjs/operators'
+import { concatMap, finalize, map, tap } from 'rxjs/operators'
 import { AlertComponent } from './mat/Alert.component'
+import { ProgressComponent } from './mat/Progress.component'
+import { ConfirmComponent } from './mat/Confirm.component'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,23 @@ export class MatDialogService extends DialogService {
   }
 
   withProgress<T = any> (work: Observable<T>, title?: string): Observable<T | undefined> {
-    return EMPTY
+    title = title || 'Please Wait...'
+    let workOutput: T
+
+    const ref = this.dialog.open(ProgressComponent, {
+      disableClose: true,
+      data: { title }
+    })
+
+    ref.afterOpened().pipe(
+      concatMap(() => work),
+      tap(val => workOutput = val), // set workOutput
+      finalize(() => ref.close())
+    ).subscribe()
+
+    return ref.afterClosed().pipe(
+      map(() => workOutput) // return workOutput
+    )
   }
 
   withAlert (title: string, options?: { content?: string, acceptButton?: string }): Observable<boolean> {
@@ -24,6 +42,7 @@ export class MatDialogService extends DialogService {
 
     const dialogRef = this.dialog.open(AlertComponent, {
       disableClose: true,
+      minWidth: 200,
       data: { title, ...options }
     })
 
@@ -37,7 +56,18 @@ export class MatDialogService extends DialogService {
     acceptButton?: string
     cancelButton?: string
   }): Observable<boolean> {
-    return EMPTY
+    title = title || 'Confirm?'
+    options = options || {}
+    options.acceptButton = options.acceptButton || 'Yes'
+    options.cancelButton = options.cancelButton || 'No'
+
+    const ref = this.dialog.open(ConfirmComponent, {
+      disableClose: true,
+      data: { title, ...options }
+    })
+    return ref.afterClosed().pipe(
+      map(result => result)
+    )
   }
 
   withForm (title: string, fields: DialogFormField[], options?: {
