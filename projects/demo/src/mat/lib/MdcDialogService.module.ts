@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ModuleWithProviders, NgModule } from '@angular/core'
-import { DialogService } from './Dialog.service'
-import { MdcDialogService } from './MdcDialog.service'
+import { DialogService } from './DialogService'
+import { MdcDialogService } from './MdcDialogService'
 import { AlertComponent } from './mdc/Alert.component'
 import { ConfirmComponent } from './mdc/Confirm.component'
 import { FormComponent } from './mdc/Form.component'
@@ -34,10 +34,10 @@ import { AngularMdcModule } from '../../AngularMdc.module'
     AngularMdcModule
   ]
 })
-export class DialogModule {
-  static withMdc (): ModuleWithProviders {
+export class MdcDialogServiceModule {
+  static forRoot (): ModuleWithProviders {
     return {
-      ngModule: DialogModule,
+      ngModule: MdcDialogServiceModule,
       providers: [
         { provide: DialogService, useClass: MdcDialogService }
       ]

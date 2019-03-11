@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { DialogService } from '../mat/lib/Dialog.service'
+import { DialogService } from '../mat/lib/DialogService'
 import { of } from 'rxjs'
 import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
 import { AsyncValidatorFn, Validators } from '@angular/forms'

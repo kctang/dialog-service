@@ -3,9 +3,9 @@ import { MDC_DIALOG_DATA, MdcDialogRef } from '@angular-mdc/web'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { filter, startWith, take, tap } from 'rxjs/operators'
 import { DialogFormField } from '../models/DialogFormField'
-import { DialogService } from '../Dialog.service'
 import { assert } from '../util/assert'
 import { markAllAsTouched } from '../util/markAllAsTouched'
+import { DialogService } from '../DialogService'
 
 // @dynamic
 @Component({

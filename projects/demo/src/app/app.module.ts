@@ -5,7 +5,7 @@ import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AngularMaterialModule } from '../AngularMaterial.module'
 import { AngularMdcModule } from '../AngularMdc.module'
-import { DialogModule } from '../mat/lib/dialog-module.module'
+import { MatDialogServiceModule } from '../mat/lib/MatDialogService.module'
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { DialogModule } from '../mat/lib/dialog-module.module'
     BrowserAnimationsModule,
     AngularMaterialModule,
     AngularMdcModule,
-    DialogModule.withMdc()
+    MatDialogServiceModule.forRoot()
   ],
   providers: [],
   bootstrap: [ AppComponent ]
