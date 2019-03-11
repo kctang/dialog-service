@@ -16,7 +16,7 @@ import { DialogModule } from '../mat/lib/dialog-module.module'
     BrowserAnimationsModule,
     AngularMaterialModule,
     AngularMdcModule,
-    DialogModule.withMat()
+    DialogModule.withMdc()
   ],
   providers: [],
   bootstrap: [ AppComponent ]

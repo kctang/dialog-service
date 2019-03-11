@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { concatMap, finalize, map, tap } from 'rxjs/operators'
 import { DialogService } from './Dialog.service'
-import { ProgressComponent } from './mat/Progress.component'
-import { AlertComponent } from './mat/Alert.component'
-import { ConfirmComponent } from './mat/Confirm.component'
+import { ProgressComponent } from './mdc/Progress.component'
+import { AlertComponent } from './mdc/Alert.component'
+import { ConfirmComponent } from './mdc/Confirm.component'
 import { DialogFormField } from './models/DialogFormField'
-import { FormComponent } from './mat/Form.component'
+import { FormComponent } from './mdc/Form.component'
 
 @Injectable({
   providedIn: 'root'
 })
-export class MatDialogService extends DialogService {
+export class MdcDialogService extends DialogService {
   constructor (private dialog: MdcDialog) {
     super()
   }
