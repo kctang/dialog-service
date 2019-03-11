@@ -1,0 +1,93 @@
+<ng-container [formGroup]="form" [ngSwitch]="field.type">
+    <!--text field-->
+    <mdc-form-field *ngSwitchCase="'text'" fluid>
+        <mdc-text-field
+                fullwidth
+                [formControlName]="fieldId"
+                [label]="field.title"
+                [required]="field.required"></mdc-text-field>
+        <mdc-helper-text validation>
+            {{errorMessage(form.controls[fieldId])}}
+        </mdc-helper-text>
+    </mdc-form-field>
+
+    <!--password-->
+    <mdc-form-field *ngSwitchCase="'password'" fluid>
+        <mdc-text-field
+                fullwidth
+                [type]="'password'"
+                [formControlName]="fieldId"
+                [label]="field.title"
+                [required]="field.required"></mdc-text-field>
+        <mdc-helper-text validation>
+            {{errorMessage(form.controls[fieldId])}}
+        </mdc-helper-text>
+    </mdc-form-field>
+
+    <!--textbox-->
+    <mdc-form-field *ngSwitchCase="'textbox'" fluid [ngClass]="'field-separator'">
+        <mdc-textarea
+                fullwidth
+                [formControlName]="fieldId"
+                [label]="field.title"
+                [required]="field.required"></mdc-textarea>
+        <mdc-helper-text validation>
+            {{errorMessage(form.controls[fieldId])}}
+        </mdc-helper-text>
+    </mdc-form-field>
+
+    <!--switch field-->
+    <mdc-form-field *ngSwitchCase="'switch'" [ngClass]="'field-separator'">
+        <mdc-switch [formControlName]="fieldId"></mdc-switch>
+        <label>{{field.title}}</label>
+    </mdc-form-field>
+
+    <!--radio field-->
+    <mdc-form-field fluid *ngSwitchCase="'radio'" [ngClass]="'field-separator'">
+        <label>{{field.title}}</label>
+        <div>
+            <mdc-radio-group [formControlName]="fieldId">
+                <mdc-form-field *ngFor="let option of field.options">
+                    <mdc-radio [value]="option.value"></mdc-radio>
+                    <label>{{option.label}}</label>
+                </mdc-form-field>
+                <mdc-helper-text validation>
+                    {{errorMessage(form.controls[fieldId])}}
+                </mdc-helper-text>
+            </mdc-radio-group>
+        </div>
+    </mdc-form-field>
+
+    <!--checkbox-->
+    <mdc-form-field fluid *ngSwitchCase="'checkbox'" [ngClass]="'field-separator'">
+        <label>{{field.title}}</label>
+        <div [formArrayName]="fieldId">
+            <mdc-form-field *ngFor="let control of getChildControls(fieldId); let i = index">
+                <ng-container [formGroupName]="i">
+                    <mdc-checkbox formControlName="checkboxItem"
+                                  [value]="getOptionValue(i)"></mdc-checkbox>
+                    <label>{{getOptionLabel(i)}}</label>
+                </ng-container>
+            </mdc-form-field>
+            <mdc-helper-text validation>
+                {{errorMessage(form.controls[fieldId])}}
+            </mdc-helper-text>
+        </div>
+    </mdc-form-field>
+
+    <!--select-->
+    <mdc-form-field fluid *ngSwitchCase="'select'" [ngClass]="'field-separator'">
+        <mdc-select [placeholder]="field.title"
+                    [formControlName]="fieldId">
+            <option *ngFor="let option of field.options"
+                    [value]="option.value">{{option.label}}</option>
+        </mdc-select>
+        <mdc-helper-text validation>
+            {{errorMessage(form.controls[fieldId])}}
+        </mdc-helper-text>
+    </mdc-form-field>
+
+    <div *ngSwitchDefault [ngClass]="['field-separator', 'unknown-field-type']">
+        Unknown form field type [{{field.type}}]
+    </div>
+</ng-container>

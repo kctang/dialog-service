@@ -1,37 +1,154 @@
 import { Component } from '@angular/core'
+import { DialogService } from '../mat/lib/Dialog.service'
+import { of } from 'rxjs'
+import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
+import { AsyncValidatorFn, Validators } from '@angular/forms'
+import { DialogFormField } from '../mat/lib/models/DialogFormField'
 
 @Component({
   selector: 'app-root',
-  template: `
-      <!--The content below is only a placeholder and can be replaced.-->
-      <div style="text-align:center">
-          <h1>
-              Welcome to {{title}}!
-          </h1>
-          <img width="300"
-               src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-      </div>
-      <h2>Here are some links to help you start: </h2>
-      <button mat-button>Click me!</button>
-      <button mdc-button raised>My Button</button>
-      <ul>
-          <li>
-              <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of
-                  Heroes</a></h2>
-          </li>
-          <li>
-              <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI
-                  Documentation</a></h2>
-          </li>
-          <li>
-              <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a>
-              </h2>
-          </li>
-      </ul>
-
-  `,
-  styles: []
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
-  title = 'demo'
+  fields: DialogFormField[] = [
+    {
+      title: 'Name', required: true,
+      validators: [
+        Validators.minLength(3),
+        Validators.maxLength(10)
+      ]
+    },
+    { title: 'Programmer?', type: 'switch' },
+    {
+      title: 'Experience in', type: 'checkbox',
+      options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ]
+    },
+    {
+      title: 'Prefers', type: 'radio',
+      options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ]
+    },
+    {
+      title: 'Comments', type: 'text'
+    },
+    {
+      title: 'Category', type: 'select',
+      options: [ 'Category 1', 'Category 2', 'Category 3' ]
+    }
+  ]
+
+  constructor (private dialogService: DialogService) {
+
+  }
+
+  doAlert () {
+    this.dialogService.withAlert('Hello!')
+  }
+
+  doConfirm () {
+    this.dialogService.withConfirm('Are you sure?').pipe(
+      concatMap(confirm => {
+        if (confirm) {
+          return this.dialogService.withAlert('Confirmed')
+        } else {
+          return this.dialogService.withAlert('Did not confirm')
+        }
+      })
+    ).subscribe()
+  }
+
+  doFormSimple () {
+    this.dialogService.withForm('Form (Simple)', [
+      { title: 'Name', required: true }
+    ]).pipe(
+      filter(result => result),
+      concatMap(result => this.dialogService.withAlert(
+        'Hello!',
+        {
+          content: JSON.stringify(result, null, 2)
+        }))
+    ).subscribe()
+  }
+
+  doFormMixed () {
+    this.dialogService.withForm('Form (Mixed with validators)', this.fields).pipe(
+      filter(result => result),
+      concatMap(result => this.dialogService.withAlert(
+        'Form Result',
+        {
+          content: JSON.stringify(result, null, 2)
+        }))
+    ).subscribe()
+  }
+
+  doFormAsyncValidator () {
+    // validator that will take 1 second to process. will only pass validation if value is bob
+    const slowNameCheck: AsyncValidatorFn = control => {
+      return of(control.value === 'bob' ? null : { 'Slow name check failed': true }).pipe(
+        delay(1000)
+      )
+    }
+
+    // replace first element of this.fields with an updated 'Name' field
+    const updatedFields = [
+      {
+        title: 'Name', required: true,
+        validators: [
+          Validators.minLength(3),
+          Validators.maxLength(10)
+        ],
+        asyncValidators: [ slowNameCheck ]
+      },
+      ...this.fields.slice(1)
+    ]
+
+    this.dialogService.withForm('Form (Async validator)', updatedFields).pipe(
+      filter(result => result),
+      concatMap(result => this.dialogService.withAlert(
+        'Form Result',
+        {
+          content: JSON.stringify(result, null, 2)
+        }))
+    ).subscribe()
+  }
+
+  doProgress () {
+    const work$ = of('output').pipe(delay(2000))
+
+    this.dialogService.withProgress(work$).pipe(
+      concatMap(result => this.dialogService.withAlert(
+        'Progress Result',
+        {
+          content: JSON.stringify(result, null, 2)
+        }))
+    ).subscribe()
+  }
+
+  doCombined () {
+    const submitForm$ = (values: any) => of(values).pipe(
+      tap(() => {
+        console.log('Pretend to submit these to server...')
+        console.log(values)
+      }),
+      delay(1500)
+    )
+
+    this.dialogService.withConfirm('Start Demo?').pipe(
+      filter(startDemo => startDemo),
+      concatMap(() => this.dialogService.withForm('Form', this.fields)),
+      filter(formValues => formValues),
+      concatMap(formValues => this.dialogService.withConfirm(
+        'Submit form values to server?',
+        { content: JSON.stringify(formValues, null, 2) }).pipe(
+        map(submitToServer => ({ submitToServer, formValues }))
+      )),
+      concatMap(({ submitToServer, formValues }) => {
+        if (submitToServer) {
+          return this.dialogService.withProgress(submitForm$(formValues), 'Sending data to server...')
+        } else {
+          return this.dialogService.withAlert('Did not send data to server')
+        }
+      })
+    ).subscribe()
+  }
 }

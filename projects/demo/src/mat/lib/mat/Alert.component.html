@@ -1,0 +1,15 @@
+<mdc-dialog>
+    <mdc-dialog-container>
+        <mdc-dialog-surface>
+            <mdc-dialog-title>{{data.title}}</mdc-dialog-title>
+            <mdc-dialog-content *ngIf="data.content">
+                {{data.content}}
+            </mdc-dialog-content>
+            <mdc-dialog-actions>
+                <button mdcDialogButton mdcDialogAction="accept">
+                    {{data.acceptButton}}
+                </button>
+            </mdc-dialog-actions>
+        </mdc-dialog-surface>
+    </mdc-dialog-container>
+</mdc-dialog>
