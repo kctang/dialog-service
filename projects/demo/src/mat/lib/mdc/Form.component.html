@@ -7,7 +7,7 @@
                 <form [formGroup]="form" id="formDialog" (ngSubmit)="doSubmit()"
                       autocomplete="off" padding-vertical>
                     <form-field [field]="field" [form]="form"
-                                *ngFor="let field of data.fields"></form-field>
+                                *ngFor="let field of formFields"></form-field>
                 </form>
             </mdc-dialog-content>
             <mdc-dialog-actions>

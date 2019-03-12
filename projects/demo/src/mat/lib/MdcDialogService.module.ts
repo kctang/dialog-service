@@ -8,8 +8,17 @@ import { ConfirmComponent } from './mdc/Confirm.component'
 import { FormComponent } from './mdc/Form.component'
 import { ProgressComponent } from './mdc/Progress.component'
 import { FormFieldComponent } from './mdc/FormField.component'
-import { AngularMaterialModule } from '../../AngularMaterial.module'
-import { AngularMdcModule } from '../../AngularMdc.module'
+import {
+  MdcButtonModule,
+  MdcCheckboxModule,
+  MdcDialogModule,
+  MdcFormFieldModule,
+  MdcLinearProgressModule,
+  MdcRadioModule,
+  MdcSelectModule,
+  MdcSwitchModule,
+  MdcTextFieldModule
+} from '@angular-mdc/web'
 
 @NgModule({
   declarations: [
@@ -30,8 +39,15 @@ import { AngularMdcModule } from '../../AngularMdc.module'
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularMaterialModule,
-    AngularMdcModule
+    MdcButtonModule,
+    MdcCheckboxModule,
+    MdcDialogModule,
+    MdcFormFieldModule,
+    MdcLinearProgressModule,
+    MdcRadioModule,
+    MdcSelectModule,
+    MdcSwitchModule,
+    MdcTextFieldModule
   ]
 })
 export class MdcDialogServiceModule {

@@ -1,1 +1,1 @@
-export type DialogFormFieldType = 'text' | 'textbox' | 'switch' | 'radio' | 'checkbox' | 'select' | 'password'
+export type DialogFormFieldType = 'text' | 'textarea' | 'switch' | 'radio' | 'checkbox' | 'select' | 'password'

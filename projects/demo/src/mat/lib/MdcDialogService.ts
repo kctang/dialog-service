@@ -82,7 +82,7 @@ export class MdcDialogService extends DialogService {
     options = options || {}
     options.submitButton = options.submitButton || 'Submit'
     options.cancelButton = options.cancelButton || 'Cancel'
-    options.cancelMessage = options.cancelMessage || 'Cancel Form?'
+    options.cancelMessage = options.cancelMessage || 'Cancel?'
 
     const ref = this.dialog.open(FormComponent, {
       escapeToClose: false,

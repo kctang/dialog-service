@@ -2,34 +2,51 @@ import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ModuleWithProviders, NgModule } from '@angular/core'
 import { DialogService } from './DialogService'
-import { AngularMaterialModule } from '../../AngularMaterial.module'
-import { AngularMdcModule } from '../../AngularMdc.module'
 import { AlertComponent } from './mat/Alert.component'
 import { MatDialogService } from './MatDialogService'
 import { ProgressComponent } from './mat/Progress.component'
 import { ConfirmComponent } from './mat/Confirm.component'
+import { FormFieldComponent } from './mat/FormField.component'
+import { FormComponent } from './mat/Form.component'
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSlideToggleModule
+} from '@angular/material'
 
 @NgModule({
   declarations: [
     AlertComponent,
     ConfirmComponent,
-    // FormComponent,
+    FormComponent,
     ProgressComponent,
-    // FormFieldComponent
+    FormFieldComponent
   ],
   entryComponents: [
     AlertComponent,
     ConfirmComponent,
-    // FormComponent,
+    FormComponent,
     ProgressComponent,
-    // FormFieldComponent
+    FormFieldComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularMaterialModule,
-    AngularMdcModule
+
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ]
 })
 export class MatDialogServiceModule {

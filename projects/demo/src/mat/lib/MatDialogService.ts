@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { EMPTY, Observable } from 'rxjs'
+import { Observable } from 'rxjs'
 import { DialogService } from './DialogService'
 import { DialogFormField } from './models/DialogFormField'
 import { MatDialog } from '@angular/material'
@@ -7,6 +7,7 @@ import { concatMap, finalize, map, tap } from 'rxjs/operators'
 import { AlertComponent } from './mat/Alert.component'
 import { ProgressComponent } from './mat/Progress.component'
 import { ConfirmComponent } from './mat/Confirm.component'
+import { FormComponent } from './mat/Form.component'
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,16 @@ export class MatDialogService extends DialogService {
     cancelButton?: string
     cancelMessage?: string
   }): Observable<any> {
-    return EMPTY
+    options = options || {}
+    options.submitButton = options.submitButton || 'Submit'
+    options.cancelButton = options.cancelButton || 'Cancel'
+    options.cancelMessage = options.cancelMessage || 'Cancel?'
+
+    const ref = this.dialog.open(FormComponent, {
+      disableClose: true,
+      data: { title, fields, ...options }
+    })
+
+    return ref.afterClosed()
   }
 }

@@ -4,6 +4,7 @@ import { of } from 'rxjs'
 import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
 import { AsyncValidatorFn, Validators } from '@angular/forms'
 import { DialogFormField } from '../mat/lib/models/DialogFormField'
+import { ArrayValidators } from '../mat/lib/util/ArrayValidators'
 
 @Component({
   selector: 'app-root',
@@ -22,17 +23,18 @@ export class AppComponent {
     { title: 'Programmer?', type: 'switch' },
     {
       title: 'Experience in', type: 'checkbox',
+      options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
+      validators: [ ArrayValidators.minSelectedValues(2) ]
+    },
+    {
+      title: 'Prefers', type: 'radio', required: true,
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ]
     },
     {
-      title: 'Prefers', type: 'radio',
-      options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ]
+      title: 'Comments', type: 'textarea'
     },
     {
-      title: 'Comments', type: 'text'
-    },
-    {
-      title: 'Category', type: 'select',
+      title: 'Category', type: 'select', required: true,
       options: [ 'Category 1', 'Category 2', 'Category 3' ]
     }
   ]
@@ -58,9 +60,11 @@ export class AppComponent {
   }
 
   doFormSimple () {
-    this.dialogService.withForm('Form (Simple)', [
-      { title: 'Name', required: true }
-    ]).pipe(
+    this.dialogService.withForm(
+      'Form (Simple)',
+      [ { title: 'Name', required: true } ],
+      { content: 'Tell me <b>something</b> about yourself...' }
+    ).pipe(
       filter(result => result),
       concatMap(result => this.dialogService.withAlert(
         'Hello!',

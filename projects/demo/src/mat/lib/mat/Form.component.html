@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+    <div *ngIf="data.content" [innerHtml]="data.content" class="content"></div>
+    <form [formGroup]="form" autocomplete="off">
+        <form-field [submitted]="submitted"
+                    [field]="field" [form]="form" *ngFor="let field of formFields"></form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button color="primary" type="button"
+            (click)="doSubmit()">{{data.submitButton}}</button>
+    <button mat-button type="button" (click)="doClose()">{{data.cancelButton}}</button>
+</div>
