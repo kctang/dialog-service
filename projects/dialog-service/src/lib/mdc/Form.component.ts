@@ -1,21 +1,20 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core'
+import { MDC_DIALOG_DATA, MdcDialogRef } from '@angular-mdc/web'
 import { DialogFormField } from '../models/DialogFormField'
 import { DialogService } from '../DialogService'
 import { BaseFormComponent } from '../BaseFormComponent'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
 
 // @dynamic
 @Component({
   templateUrl: './Form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [ './Form.component.scss' ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormComponent extends BaseFormComponent {
   constructor (
     cd: ChangeDetectorRef,
-    dialogRef: MatDialogRef<FormComponent>,
+    dialogRef: MdcDialogRef<FormComponent>,
     dialogService: DialogService,
-    @Inject(MAT_DIALOG_DATA) public data: {
+    @Inject(MDC_DIALOG_DATA) public data: {
       title: string
       fields: DialogFormField[]
       submitButton: string
@@ -24,6 +23,6 @@ export class FormComponent extends BaseFormComponent {
       content?: string
     }
   ) {
-    super(cd, dialogService, dialogRef, data.fields, data.cancelMessage)
+    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields)
   }
 }

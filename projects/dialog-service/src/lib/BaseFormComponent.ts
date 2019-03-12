@@ -14,15 +14,15 @@ type Closeable = {
  * Manage form creation and submission.
  */
 export class BaseFormComponent {
-  protected submitted = false
+  submitted = false
   form: FormGroup
 
   constructor (
     private cd: ChangeDetectorRef,
     private dialogService: DialogService,
     private closeable: Closeable,
-    protected formFields: DialogFormField[],
-    protected cancelMessage: string
+    private cancelMessage: string,
+    public formFields: DialogFormField[]
   ) {
     const fb = new FormBuilder()
 

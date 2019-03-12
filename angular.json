@@ -107,6 +107,40 @@
           }
         }
       }
+    },
+    "dialog-service": {
+      "root": "projects/dialog-service",
+      "sourceRoot": "projects/dialog-service/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/dialog-service/tsconfig.lib.json",
+            "project": "projects/dialog-service/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dialog-service/src/test.ts",
+            "tsConfig": "projects/dialog-service/tsconfig.spec.json",
+            "karmaConfig": "projects/dialog-service/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dialog-service/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "demo"

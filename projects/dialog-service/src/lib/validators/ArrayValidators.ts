@@ -1,6 +1,7 @@
 import { AbstractControl, FormArray, ValidatorFn } from '@angular/forms'
-import { assert } from './assert'
+import { assert } from '../util/assert'
 
+// @dynamic
 export class ArrayValidators {
   /**
    * Validates that 'checkbox' dialog form field has the specified minimum number of selected values.

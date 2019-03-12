@@ -1,10 +1,8 @@
 import { Component } from '@angular/core'
-import { DialogService } from '../mat/lib/DialogService'
 import { of } from 'rxjs'
 import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
 import { AsyncValidatorFn, Validators } from '@angular/forms'
-import { DialogFormField } from '../mat/lib/models/DialogFormField'
-import { ArrayValidators } from '../mat/lib/util/ArrayValidators'
+import { ArrayValidators, DialogService, DialogFormField } from 'dialog-service'
 
 @Component({
   selector: 'app-root',

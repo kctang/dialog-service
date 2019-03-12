@@ -18,6 +18,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "dialog-service": [
+        "dist/dialog-service"
+      ],
+      "dialog-service/*": [
+        "dist/dialog-service/*"
+      ]
+    }
   }
 }
