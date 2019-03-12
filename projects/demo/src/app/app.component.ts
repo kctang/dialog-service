@@ -155,4 +155,33 @@ export class AppComponent {
       })
     ).subscribe()
   }
+
+  doForgotUsername () {
+    // simulate user lookup
+    const lookUpUsername$ = (formValues: any) => {
+      const username = formValues.email === 'bob@gmail.com' ? 'bob' : false
+      return of(username).pipe(
+        // simulate 1 second processing delay
+        delay(1000)
+      )
+    }
+
+    this.dialogService.withConfirm(
+      'Forgot Username',
+      { content: 'Are you a registered user?' }
+    ).pipe(
+      filter(registeredUser => registeredUser === true),
+      concatMap(() => this.dialogService.withForm(
+        'What is your email?',
+        [ { title: 'Email' } ],
+        { content: 'Try <i>bob@gmail.com</i>' }
+      )),
+      filter(formValues => formValues !== false),
+      concatMap(formValues => this.dialogService.withProgress(lookUpUsername$(formValues))),
+      concatMap(username => {
+        const message = username ? `Username is [${username}]` : 'Email not registered'
+        return this.dialogService.withAlert(message)
+      })
+    ).subscribe()
+  }
 }
