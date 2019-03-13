@@ -6,7 +6,8 @@
 
 > Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs without writing component templates. 
 
-[Documentation & Demos](https://dialog-service.surge.sh)
+[ [Documentation & Demos](https://dialog-service.surge.sh) | [StackBlitz Template](https://stackblitz.com/edit/dialog-service-starter) ]
+
 - Create pre-defined modal dialogs without writing Angular component templates.
 - Support for alert, confirmation and progress dialogs.
 - Support for form based dialogs using a high-level form definition abstraction. 
