@@ -115,7 +115,8 @@
                     dialog will close and return false.
                 </div>
                 <pre><code [highlight]="source.apiWithForm"></code></pre>
-                <div><code>DialogFormField</code> describes a form field with the following properties:
+                <div><code>DialogFormField</code> describes a form field with the following
+                    properties:
                 </div>
                 <ul>
                     <li><strong>title</strong> - Label for the field. Required.</li>
@@ -166,6 +167,41 @@
     <mat-tab-group>
         <mat-tab label="Reactive Demo">
             <div padding>
+                <div padding>
+                    To demonstrate the reactive nature of dialog service, we will try to implement
+                    the following
+                    requirements:
+
+                    <ol>
+                        <li>Ask whether user is registered with a confirmation dialog.</li>
+                        <li>If answer is yes, ask for user's email with a form dialog.</li>
+                        <li>Look up user's username based on email provided. Since this is a server
+                            call, it can take some time, so show a progress dialog while processing.
+                        </li>
+                        <li>Once processing is done, alert user with retrieved username.</li>
+                    </ol>
+
+                    <div>Given the asynchronous sequence of events that involves server side
+                        processing and user interaction (e.g. getting user inputs), implementing
+                        this can be
+                        relatively complex.
+                    </div>
+
+                    <div>With dialog-service, we can describe each requirement with a function
+                        that returns an Observable.
+                    </div>
+                    <ol>
+                        <li><code [highlight]="source.requirement1"></code></li>
+                        <li><code [highlight]="source.requirement2"></code></li>
+                        <li><code [highlight]="source.requirement3"></code></li>
+                        <li><code [highlight]="source.requirement4"></code></li>
+                    </ol>
+
+                    <div>
+                        A complete solution can be created by interweaving these observables using
+                        RxJS operators.
+                    </div>
+                </div>
                 <button mat-raised-button color="primary" (click)="doForgotUsername()">
                     Run Demo
                 </button>
@@ -230,5 +266,9 @@
     <mat-divider></mat-divider>
     <h2>License</h2>
     MIT
+
+    <mat-divider></mat-divider>
+    <h2>Source Code</h2>
+    <a href="https://github.com/kctang/dialog-service">dialog-service</a> is hosted on GitHub.
 
 </div>

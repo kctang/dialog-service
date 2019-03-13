@@ -227,5 +227,10 @@ export const sourceCodeReference = {
     '        submitButton?: string\n' +
     '        cancelButton?: string\n' +
     '    }\n' +
-    '): Observable<any>'
+    '): Observable<any>',
+
+  requirement1: 'withConfirm(\'Forgot Username\', { content: \'Are you a registered user?\' })',
+  requirement2: 'withForm(\'What is your email?\',[ { title: \'Email\' } ])',
+  requirement3: 'withProgress(lookUpUsername$(formValues))',
+  requirement4: 'withAlert(username ? ``Username is [${username}]`` : \'Email not registered\')'
 }

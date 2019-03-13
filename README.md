@@ -1,7 +1,10 @@
 # dialog-service
+[![Build Status](https://travis-ci.org/kctang/dialog-service.svg)](https://travis-ci.org/kctang/dialog-service)
+[![npm version](https://badge.fury.io/js/dialog-service.svg)](https://badge.fury.io/js/dialog-service)
 
 > Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs without writing component templates. 
 
+[Documentation & Demos](https://dialog-service.surge.sh)
 - Create pre-defined modal dialogs without writing Angular component templates.
 - Support for alert, confirmation and progress dialogs.
 - Support for form based dialogs using a high-level form definition abstraction. 
@@ -64,86 +67,6 @@ export class AppComponent {
   }
 }
 ````
-
-## Examples
-
-### Example 1: Hello, World
-
-Once the appropriate dialog service module has been imported, `DialogService` can be injected into
-any Angular component.
-
-```typescript
-import { DialogService } from 'dialog-service'
-
-@Component({
-  selector: 'app-root',
-  template: '<button (click)="doAlert()">Demo</button>',
-})
-export class AppComponent {
-  constructor (private dialogService: DialogService) {
-  }
-
-  doAlert () {
-    this.dialogService.withAlert('Hello, World!')
-  }
-}
-```
-[TODO: [Example on StackBlitz](https://stackblitz.com/)]
-
-### Example 2: Retrieve Username with Email 
-
-To demonstrate the reactive nature of dialog service, we will try to implement the following 
-requirements:
- 
-1. Ask whether user is registered with a confirmation dialog.
-1. If answer is yes, ask for user's email with a form dialog.
-1. Look up user's username based on email provided. Since this is a server call, it can take some 
-   time, so show a progress dialog while processing.
-1. Once processing is done, alert user with retrieved username.
-
-Each of the requirement can be extracted into a single function call: 
-1. `withConfirm('Forgot Username', { content: 'Are you a registered user?' })`
-1. `withForm('What is your email?',[ { title: 'Email' } ])`
-1. `withProgress(lookUpUsername$(formValues))`
-1. `withAlert(username ? ``Username is [${username}]`` : 'Email not registered')`
-
-For the complete solution, we need to interweave these functions calls with RxJS operators: 
-
-````typescript
-// simulate user lookup
-const lookUpUsername$ = (formValues: any) => {
-  const username = formValues.email === 'bob@gmail.com' ? 'bob' : false
-  return of(username).pipe(
-    // simulate 1 second processing delay
-    delay(1000)
-  )
-}
-
-this.dialogService.withConfirm(
-  'Forgot Username',
-  { content: 'Are you a registered user?' }
-).pipe(
-  filter(registeredUser => registeredUser === true),
-  concatMap(() => this.dialogService.withForm(
-    'What is your email?',
-    [ { title: 'Email' } ],
-    { content: 'Try <i>bob@gmail.com</i>' }
-  )),
-  filter(formValues => formValues !== false),
-  concatMap(formValues => this.dialogService.withProgress(lookUpUsername$(formValues))),
-  concatMap(username => {
-    const message = username ? `Username is [${username}]` : 'Email not registered'
-    return this.dialogService.withAlert(message)
-  })
-).subscribe()
-````
-
-[TODO: [Example on StackBlitz](https://stackblitz.com/)]
-
-### More Examples
-
-TODO: You can find more examples on StackBlitz.
-
 
 ## DialogService API
 
