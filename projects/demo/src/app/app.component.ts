@@ -2,7 +2,14 @@ import { Component } from '@angular/core'
 import { of } from 'rxjs'
 import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
 import { AsyncValidatorFn, Validators } from '@angular/forms'
-import { ArrayValidators, DialogService, DialogFormField } from 'dialog-service'
+import {
+  MatDialogService,
+  ArrayValidators,
+  MdcDialogService,
+  DialogService,
+  DialogFormField
+} from 'dialog-service'
+import { sourceCodeReference } from './sourceCodeReference'
 
 @Component({
   selector: 'app-root',
@@ -10,6 +17,9 @@ import { ArrayValidators, DialogService, DialogFormField } from 'dialog-service'
   styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
+  source = sourceCodeReference
+  uiLibrary: string = 'mat'
+
   fields: DialogFormField[] = [
     {
       title: 'Name', required: true,
@@ -37,8 +47,11 @@ export class AppComponent {
     }
   ]
 
-  constructor (private dialogService: DialogService) {
-
+  // NOTE: normally, we should inject "DialogService" instead of actual implementation
+  // MatDialogService and MdcDialogService should never be imported into your application directly
+  constructor (
+    private matDialogService: MatDialogService,
+    private mdcDialogService: MdcDialogService) {
   }
 
   doAlert () {
@@ -181,5 +194,13 @@ export class AppComponent {
         return this.dialogService.withAlert(message)
       })
     ).subscribe()
+  }
+
+  get dialogService (): DialogService {
+    if (this.uiLibrary === 'mat') {
+      return this.matDialogService
+    } else {
+      return this.mdcDialogService
+    }
   }
 }

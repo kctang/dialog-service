@@ -4,7 +4,17 @@ import { AppComponent } from './app.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AngularMaterialModule } from '../AngularMaterial.module'
 import { AngularMdcModule } from '../AngularMdc.module'
+import { HighlightModule } from 'ngx-highlightjs'
+import typescript from 'highlight.js/lib/languages/typescript'
+
 import { MatDialogServiceModule, MdcDialogServiceModule } from 'dialog-service'
+import { FormsModule } from '@angular/forms'
+
+export function hljsLanguages () {
+  return [
+    { name: 'typescript', func: typescript }
+  ]
+}
 
 @NgModule({
   declarations: [
@@ -13,12 +23,15 @@ import { MatDialogServiceModule, MdcDialogServiceModule } from 'dialog-service'
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     AngularMaterialModule,
     AngularMdcModule,
-    // MdcDialogServiceModule.forRoot(),
-    MatDialogServiceModule.forRoot()
+    HighlightModule.forRoot({
+      languages: hljsLanguages
+    }),
+    MatDialogServiceModule,
+    MdcDialogServiceModule
   ],
-  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

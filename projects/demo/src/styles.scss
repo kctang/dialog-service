@@ -9,6 +9,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+@import '~highlight.js/styles/github.css';
 
 // --- angular-mdc stuff
 $mdc-theme-primary: #1565c0; // primary color

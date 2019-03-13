@@ -1,26 +1,234 @@
-<div class="mat-typography">
+<div class="mat-typography" padding>
     <h1>dialog-service</h1>
-
+    Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs
+    without writing component templates.
     <ul>
-        <li>
-            <button mat-button (click)="doAlert()">Alert</button>
+        <li>Create pre-defined modal dialogs without writing Angular component templates.</li>
+        <li>Support for alert, confirmation and progress dialogs.</li>
+        <li>Support for form based dialogs using a high-level form definition abstraction.</li>
+        <li>No need to deal with Angular form controls, react to form value changes or layout form
+            fields in Angular component templates.
         </li>
+        <li>Supported field types: text, textarea, switch, radio, checkbox, select, password.</li>
+        <li>Supports standard Angular form validators and async validators.</li>
+        <li>Just receive JSON object with validated form values when user submits the form.</li>
         <li>
-            <button mat-button (click)="doConfirm()">Confirm</button>
-        </li>
-        <li>
-            <button mat-button (click)="doFormSimple()">Form (Simple)</button>
-            <button mat-button (click)="doFormMixed()">Form (Mixed with validators)</button>
-            <button mat-button (click)="doFormAsyncValidator()">Form (Async validator)</button>
-        </li>
-        <li>
-            <button mat-button (click)="doProgress()">Progress</button>
-        </li>
-        <li>
-            <button mat-button (click)="doCombined()">Combined</button>
-        </li>
-        <li>
-            <button mat-button (click)="doForgotUsername()">Forgot Username</button>
+            API Design
+            <ul>
+                <li>Simple. Four primary API functions: <code>withAlert()</code>, <code>withProgress()</code>,
+                    <code>withConfirm()</code>, <code>withForm()</code>.
+                </li>
+                <li>Reactive. Functions return observables with appropriate data to facilitate a
+                    more fluent reactive programming pattern.
+                </li>
+                <li>API designed to be UI toolkit agnostic. Currently supports <a
+                        href="https://material.angular.io/">Angular Material</a>
+                    and <a href="https://trimox.github.io/angular-mdc-web/">Material Web Components
+                        for Angular</a>.
+                </li>
+            </ul>
         </li>
     </ul>
+
+    <mat-divider></mat-divider>
+    <h2>Getting Started</h2>
+    <ul>
+        <li>Before installing this library, you need an existing Angular application configured with
+            Angular Material (or Material Web Components for Angular).
+        </li>
+
+        <li> Add <code>dialog-service</code> as an NPM dependency with <code>npm install
+            dialog-service</code>.
+        </li>
+
+        <li> Import this module to your application:
+            <pre><code [highlight]="source.install1"></code></pre>
+        </li>
+
+        <li>Inject <code>DialogService</code> to your components and call the <code>withXxx()</code>
+            functions.
+            <pre><code [highlight]="source.install2"></code></pre>
+        </li>
+    </ul>
+
+    <mat-divider></mat-divider>
+    <h2>DialogService API</h2>
+    <div>
+        DialogService class exposes functions to create alert, confirmation, progress and
+        form based dialogs.
+    </div>
+
+    <mat-tab-group>
+        <mat-tab label="withAlert()">
+            <div padding>
+                <div>
+                    Displays an alert dialog with optional title and content. User clicks OK to
+                    close
+                    the
+                    dialog.
+
+                    Returns true after the dialog is closed.
+                </div>
+                <pre><code [highlight]="source.apiWithAlert"></code></pre>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="withConfirm()">
+            <div padding>
+                <div>
+                    Display confirmation dialog. The dialog will close when user clicks on either
+                    the
+                    accept or
+                    cancel
+                    button.
+
+                    Returns true if user clicks on the `acceptButton` and false if user clicks on
+                    `cancelButton`.
+                </div>
+                <pre><code [highlight]="source.apiWithConfirm"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="withProgress()">
+            <div padding>
+                <div>
+                    Display dialog with a spinner/progress bar that blocks UI interaction until
+                    processing of
+                    associated observable workload completes.
+
+                    Returns the last value emitted by the workload. If workload throws error,
+                    progress
+                    dialog
+                    will close and return undefined.
+                </div>
+                <pre><code [highlight]="source.apiWithProgress"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="withForm()">
+            <div padding>
+                <div>
+                    Display a dialog with form fields for data collection.
+
+                    The dialog will close and return form values (as a JSON object) when user clicks
+                    on
+                    submit button (provided all field validation passed).If user cancels the form,
+                    the
+                    dialog will close and return false.
+                </div>
+                <pre><code [highlight]="source.apiWithForm"></code></pre>
+                <div><code>DialogFormField</code> describes a form field with the following properties:
+                </div>
+                <ul>
+                    <li><strong>title</strong> - Label for the field. Required.</li>
+                    <li><strong>id</strong> - Unique identifier for the field. Optional. Defaults to
+                        camel case
+                        representation of title.
+                    </li>
+                    <li><strong>type</strong> - Field type. Valid values are `text`, `textarea`,
+                        `switch`,
+                        `radio`, `checkbox`, `select` and `password`. Optional. Defaults to `text`.
+                    </li>
+                    <li><strong>value</strong> - Default value for the field when the form is
+                        displayed.
+                        Optional.
+                    </li>
+                    <li><strong>options</strong> - List of possible options for `radio`, `checkbox`
+                        and
+                        `select`
+                        field types. Options can be specified as an "array of string" or an "array
+                        of
+                        object
+                        with `value` and `label` as keys". Optional.
+                    </li>
+                    <li><strong>required</strong> - Flag to indicate that field input is required.
+                        Optional.
+                        Defaults to false.
+                    </li>
+                    <li><strong>validators</strong> - Array of Angular validation functions (i.e.
+                        ValidatorFn).
+                        Optional.
+                    </li>
+                    <li><strong>asyncValidators</strong> - Array of asynchronous Angular validation
+                        functions
+                        (i.e. AsyncValidatorFn). Optional.
+                    </li>
+                </ul>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <mat-divider></mat-divider>
+    <h2>Demos</h2>
+    <span class="mat-body-2" padding-right>Run demo with this UI library: </span>
+    <mat-radio-group [(ngModel)]="uiLibrary">
+        <mat-radio-button value="mat">Angular Material</mat-radio-button>
+        <mat-radio-button value="mdc">Material Web Components for Angular</mat-radio-button>
+    </mat-radio-group>
+    <mat-tab-group>
+        <mat-tab label="Reactive Demo">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doForgotUsername()">
+                    Run Demo
+                </button>
+                <pre>Source Code:<code [highlight]="source.forgotUsername"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Alert">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doAlert()">Run Demo</button>
+                <pre><code [highlight]="source.alert"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Confirm">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doConfirm()">Run Demo</button>
+                <pre><code [highlight]="source.confirm"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Form (Simple)">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doFormSimple()">Run Demo</button>
+                <pre><code [highlight]="source.formSimple"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Form (Mixed with validators)">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doFormMixed()">Run Demo</button>
+                <pre><code [highlight]="source.formMixed"></code></pre>
+                <pre>Definition for Fields<code [highlight]="source.fields"></code></pre>
+                <pre>Sample output from withForm()<code
+                        [highlight]="source.sampleData"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Form (Async validator)">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doFormAsyncValidator()">Run
+                    Demo
+                </button>
+                <pre><code [highlight]="source.formAsyncValidator"></code></pre>
+                <pre>Definition for Fields<code [highlight]="source.fields"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Progress">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doProgress()">Run Demo</button>
+                <pre><code [highlight]="source.progress"></code></pre>
+            </div>
+        </mat-tab>
+        <mat-tab label="Combined">
+            <div padding>
+                <button mat-raised-button color="primary" (click)="doCombined()">Run Demo</button>
+                <pre><code [highlight]="source.combined"></code></pre>
+                <pre>Definition for Fields<code [highlight]="source.fields"></code></pre>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <mat-divider></mat-divider>
+    <h2>Support</h2>
+    Reach out to me on Twitter at @kctang
+
+    <mat-divider></mat-divider>
+    <h2>License</h2>
+    MIT
+
 </div>

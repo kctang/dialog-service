@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { ModuleWithProviders, NgModule } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { DialogService } from './DialogService'
 import { MdcDialogService } from './MdcDialogService'
 import { AlertComponent } from './mdc/Alert.component'
@@ -48,15 +48,11 @@ import {
     MdcSelectModule,
     MdcSwitchModule,
     MdcTextFieldModule
+  ],
+  providers: [
+    MdcDialogService,
+    { provide: DialogService, useClass: MdcDialogService }
   ]
 })
 export class MdcDialogServiceModule {
-  static forRoot (): ModuleWithProviders {
-    return {
-      ngModule: MdcDialogServiceModule,
-      providers: [
-        { provide: DialogService, useClass: MdcDialogService }
-      ]
-    }
-  }
 }

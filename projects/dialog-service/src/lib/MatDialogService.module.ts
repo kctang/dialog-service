@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { ModuleWithProviders, NgModule } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { DialogService } from './DialogService'
 import { AlertComponent } from './mat/Alert.component'
 import { MatDialogService } from './MatDialogService'
@@ -47,15 +47,11 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatSlideToggleModule
+  ],
+  providers: [
+    MatDialogService,
+    { provide: DialogService, useClass: MatDialogService }
   ]
 })
 export class MatDialogServiceModule {
-  static forRoot (): ModuleWithProviders {
-    return {
-      ngModule: MatDialogServiceModule,
-      providers: [
-        { provide: DialogService, useClass: MatDialogService }
-      ]
-    }
-  }
 }

@@ -1,3 +1,21 @@
-li {
-  padding: 8px;
+.mat-divider {
+  margin-top: 16px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+[padding] {
+  padding: 16px;
+}
+
+[padding-right] {
+  padding-right: 16px;
+}
+
+h3 {
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-weight: bold;
 }
