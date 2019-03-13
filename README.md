@@ -1,6 +1,8 @@
 # dialog-service
-[![Build Status](https://travis-ci.org/kctang/dialog-service.svg)](https://travis-ci.org/kctang/dialog-service)
-[![npm version](https://badge.fury.io/js/dialog-service.svg)](https://badge.fury.io/js/dialog-service)
+[![npm](https://img.shields.io/npm/v/dialog-service.svg)](https://www.npmjs.com/package/dialog-service)
+[![Build Status](https://travis-ci.org/kctang/dialog-service.svg)](http://github.com/kctang/dialog-service)
+![license](https://img.shields.io/npm/l/dialog-service.svg)
+![dependencies](https://img.shields.io/david/kctang/dialog-service.svg)
 
 > Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs without writing component templates. 
 
