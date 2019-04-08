@@ -158,6 +158,18 @@ with the following properties:
    - **`validators`** - Array of Angular validation functions (i.e. ValidatorFn). Optional.
    - **`asyncValidators`** - Array of asynchronous Angular validation functions (i.e. AsyncValidatorFn). Optional.
 
+
+## Publish Library
+
+To publish the library:
+
+```
+ng lint dialog-service
+ng build dialog-service
+cd dist/dialog-service
+npm publish
+```
+
 ## Support
 
 Reach out to me on Twitter at @kctang
