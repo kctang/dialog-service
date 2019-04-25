@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Scripts to build, serve and publish library.
+
+### Fixed
+- withForm() does not work on demo site when built with production mode.
+
 ## [0.1.0] - 2019-04-25
 
 ### Added
