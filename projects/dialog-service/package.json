@@ -1,6 +1,6 @@
 {
   "name": "dialog-service",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs without writing component templates.",
   "repository": {
     "type": "git",
@@ -20,7 +20,9 @@
   "homepage": "https://dialog-service.surge.sh/",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+    "@angular/core": "^7.2.0",
+    "common-style-attributes": "^0.0.2",
+    "ng-quick-form": "^0.0.3"
   },
   "optionalDependencies": {
     "@angular/material": "^7.3.3",

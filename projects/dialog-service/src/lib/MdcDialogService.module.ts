@@ -5,9 +5,7 @@ import { DialogService } from './DialogService'
 import { MdcDialogService } from './MdcDialogService'
 import { AlertComponent } from './mdc/Alert.component'
 import { ConfirmComponent } from './mdc/Confirm.component'
-import { FormComponent } from './mdc/Form.component'
 import { ProgressComponent } from './mdc/Progress.component'
-import { FormFieldComponent } from './mdc/FormField.component'
 import {
   MdcButtonModule,
   MdcCheckboxModule,
@@ -24,16 +22,12 @@ import {
   declarations: [
     AlertComponent,
     ConfirmComponent,
-    FormComponent,
-    ProgressComponent,
-    FormFieldComponent
+    ProgressComponent
   ],
   entryComponents: [
     AlertComponent,
     ConfirmComponent,
-    FormComponent,
-    ProgressComponent,
-    FormFieldComponent
+    ProgressComponent
   ],
   imports: [
     CommonModule,

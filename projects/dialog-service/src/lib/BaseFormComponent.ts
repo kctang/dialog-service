@@ -1,13 +1,13 @@
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { FormGroup } from '@angular/forms'
 import { ChangeDetectorRef } from '@angular/core'
 import { DialogService } from './DialogService'
 import { filter, startWith, take, tap } from 'rxjs/operators'
 import { assert } from './util/assert'
+import { QuickForm, QuickFormField } from 'ng-quick-form'
 import { markAllAsDirtyAndTouched } from './util/markAllAsDirtyAndTouched'
-import { DialogFormField } from './models/DialogFormField'
 
 type Closeable = {
-  close: (result: boolean) => void
+  close: (result: any) => void
 }
 
 /**
@@ -22,61 +22,9 @@ export class BaseFormComponent {
     private dialogService: DialogService,
     private closeable: Closeable,
     private cancelMessage: string,
-    public formFields: DialogFormField[]
+    public formFields: QuickFormField[]
   ) {
-    const fb = new FormBuilder()
-
-    // pre-process dialog form fields to set default values
-    this.formFields = this.formFields.map(field => {
-      if (!field.id) {
-        field.id = this.camelize(field.title)
-      }
-
-      if (!field.type) {
-        field.type = 'text'
-      }
-
-      if (field.options) {
-        // perform #conversion to { value: string, label: string }
-        field.options = field.options.map(option => {
-          if (typeof option === 'string') {
-            return { label: option, value: option }
-          } else {
-            return option
-          }
-        })
-      }
-
-      return field
-    })
-
-    // transform DialogFormField[] to FormBuilder's controls config
-    const formDefinition: any = {}
-    this.formFields.map(field => {
-      if (field.type === 'checkbox') {
-        // will always be options2 type because of #conversion
-        const options2 = field.options as { value: string, label: string }[] || []
-        const options = options2.map(option => {
-          const values = Array.isArray(field.value) ? field.value : [ field.value ]
-          return fb.group({
-            checkboxItem: [ values.indexOf(option.value) !== -1 ? option.value : '' ]
-          })
-        })
-        formDefinition[ field.id! ] = fb.array(options, [
-          ...(field.validators) || []
-        ], [
-          ...(field.asyncValidators) || []
-        ])
-      } else {
-        formDefinition[ field.id! ] = [ field.value || '', [
-          ...(field.validators || [])
-        ], [
-          ...(field.asyncValidators || [])
-        ] ]
-      }
-    })
-
-    this.form = fb.group(formDefinition)
+    this.form = QuickForm.makeForm(this.formFields)
   }
 
   doClose () {
@@ -111,38 +59,7 @@ export class BaseFormComponent {
       return
     }
 
-    // transform checkbox values
-    const formValue = this.form.value
-    this.formFields.map(field => {
-      if (field.type === 'checkbox') {
-        const values: { checkboxItem: boolean }[] = formValue[ field.id! ]
-        formValue[ field.id! ] = values
-          .map((val, idx) => ({
-            checkboxItem: val.checkboxItem,
-            index: idx
-          }))
-          .filter(val => val.checkboxItem)
-          .reduce((previousValue, currentValue) => {
-            // always contain value because of #conversion
-            const options2 = field.options as { value: string, label: string }[] || []
-            const option = options2[ currentValue.index ]
-            return [
-              ...previousValue,
-              option.value
-            ]
-          }, [] as string[])
-      }
-    })
     // close form dialog, return form value object as result
-    this.closeable.close(formValue)
-  }
-
-  // https://stackoverflow.com/questions/2970525/converting-any-string-into-camel-case
-  camelize (str: string) {
-    return str.replace(
-      /(?:^\w|[A-Z]|\b\w)/g,
-      function (letter, index) {
-        return index === 0 ? letter.toLowerCase() : letter.toUpperCase()
-      }).replace(/\s+/g, '')
+    this.closeable.close(QuickForm.preProcessFormValues(this.form.value))
   }
 }

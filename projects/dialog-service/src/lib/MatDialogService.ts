@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { DialogService } from './DialogService'
-import { DialogFormField } from './models/DialogFormField'
 import { MatDialog } from '@angular/material'
 import { concatMap, finalize, map, tap } from 'rxjs/operators'
 import { AlertComponent } from './mat/Alert.component'
 import { ProgressComponent } from './mat/Progress.component'
 import { ConfirmComponent } from './mat/Confirm.component'
 import { FormComponent } from './mat/Form.component'
+import { QuickFormField } from 'ng-quick-form'
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +71,7 @@ export class MatDialogService extends DialogService {
     )
   }
 
-  withForm (title: string, fields: DialogFormField[], options?: {
+  withForm (title: string, fields: QuickFormField[], options?: {
     content?: string
     submitButton?: string
     cancelButton?: string

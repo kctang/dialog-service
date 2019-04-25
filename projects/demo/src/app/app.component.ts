@@ -4,11 +4,10 @@ import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
 import { AsyncValidatorFn, Validators } from '@angular/forms'
 import {
   MatDialogService,
-  ArrayValidators,
   MdcDialogService,
-  DialogService,
-  DialogFormField
+  DialogService
 } from 'dialog-service'
+import { CheckboxValidators, QuickFormField } from 'ng-quick-form'
 import { sourceCodeReference } from './sourceCodeReference'
 
 @Component({
@@ -20,7 +19,7 @@ export class AppComponent {
   source = sourceCodeReference
   uiLibrary: string = 'mat'
 
-  fields: DialogFormField[] = [
+  fields: QuickFormField[] = [
     {
       title: 'Name', required: true,
       validators: [
@@ -32,7 +31,7 @@ export class AppComponent {
     {
       title: 'Experience in', type: 'checkbox',
       options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
-      validators: [ ArrayValidators.minSelectedValues(2) ]
+      validators: [ CheckboxValidators.minSelectedValues(2) ]
     },
     {
       title: 'Prefers', type: 'radio', required: true,

@@ -2,28 +2,34 @@
     <h1>dialog-service
         <span>
             &nbsp;
-            <a href="https://www.npmjs.com/package/dialog-service"><img src="https://img.shields.io/npm/v/dialog-service.svg"></a>
+            <a href="https://www.npmjs.com/package/dialog-service"><img
+                    src="https://img.shields.io/npm/v/dialog-service.svg"></a>
             &nbsp;
-            <a href="http://github.com/kctang/dialog-service"><img src="https://travis-ci.org/kctang/dialog-service.svg"></a>
+            <a href="http://github.com/kctang/dialog-service"><img
+                    src="https://travis-ci.org/kctang/dialog-service.svg"></a>
             &nbsp;
-            <a href="http://github.com/kctang/dialog-service"><img src="https://img.shields.io/npm/l/dialog-service.svg"></a>
+            <a href="http://github.com/kctang/dialog-service"><img
+                    src="https://img.shields.io/npm/l/dialog-service.svg"></a>
         </span>
     </h1>
 
     Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs
     without writing component templates.
+
     <ul>
         <li>Create pre-defined modal dialogs without writing Angular component templates.</li>
         <li>Support for alert, confirmation and progress dialogs.</li>
-        <li>Support for form based dialogs using a high-level form definition abstraction.</li>
-        <li>No need to deal with Angular form controls, react to form value changes or layout form
-            fields in Angular component templates.
-        </li>
-        <li>Supported field types: text, textarea, switch, radio, checkbox, select, password.</li>
-        <li>Supports standard Angular form validators and async validators.</li>
-        <li>Just receive JSON object with validated form values when user submits the form.</li>
         <li>
-            API Design
+            Support for form based dialogs using ng-quick-form.
+            <ul>
+                <li>Simplify usage of Angular forms with Angular Material for common use cases.</li>
+                <li>Supports standard Angular form validators and async validators.</li>
+                <li>Just receive JSON object with validated form values when user submits the
+                    form.
+                </li>
+            </ul>
+        </li>
+        <li>API Design
             <ul>
                 <li>Simple. Four primary API functions: <code>withAlert()</code>, <code>withProgress()</code>,
                     <code>withConfirm()</code>, <code>withForm()</code>.
@@ -32,17 +38,17 @@
                     more fluent reactive programming pattern.
                 </li>
                 <li>API designed to be UI toolkit agnostic. Currently supports <a
-                        href="https://material.angular.io/">Angular Material</a>
-                    and <a href="https://trimox.github.io/angular-mdc-web/">Material Web Components
-                        for Angular</a>.
+                        href="https://material.angular.io/">Angular Material</a> and
+                    <a href="https://trimox.github.io/angular-mdc-web/">Material Web Components for
+                        Angular</a> (deprecated).
                 </li>
             </ul>
         </li>
     </ul>
-
     <div>
         [ <a href="https://stackblitz.com/edit/dialog-service-starter">StackBlitz Template</a> |
-        <a href="https://github.com/kctang/dialog-service-mat-demo">Minimal Demo for Angular Material</a> ]
+        <a href="https://github.com/kctang/dialog-service-mat-demo">Minimal Demo for Angular
+            Material</a> ]
     </div>
 
     <mat-divider></mat-divider>
@@ -64,6 +70,11 @@
             functions.
             <pre><code [highlight]="source.install2"></code></pre>
         </li>
+        <li>If you are planning to use withForm(), you should add these styles to your application's
+            SCSS file.
+            Field layout is managed using <a href="https://common-style-attributes.surge.sh/">common-style-attributes</a>.
+            <pre><code [highlight]="source.install3"></code></pre>
+        </li>
     </ul>
 
     <mat-divider></mat-divider>
@@ -78,11 +89,7 @@
             <div padding>
                 <div>
                     Displays an alert dialog with optional title and content. User clicks OK to
-                    close
-                    the
-                    dialog.
-
-                    Returns true after the dialog is closed.
+                    close the dialog. Returns true after the dialog is closed.
                 </div>
                 <pre><code [highlight]="source.apiWithAlert"></code></pre>
             </div>
@@ -124,50 +131,14 @@
                     Display a dialog with form fields for data collection.
 
                     The dialog will close and return form values (as a JSON object) when user clicks
-                    on
-                    submit button (provided all field validation passed).If user cancels the form,
-                    the
-                    dialog will close and return false.
+                    on submit button (provided all field validation passed).If user cancels the
+                    form, the dialog will close and return false.
                 </div>
                 <pre><code [highlight]="source.apiWithForm"></code></pre>
-                <div><code>DialogFormField</code> describes a form field with the following
-                    properties:
+                <div>
+                    For documentation on QuickFormField, refer to <a
+                        href="https://ng-quick-form.surge.sh/">ng-quick-form</a>.
                 </div>
-                <ul>
-                    <li><strong>title</strong> - Label for the field. Required.</li>
-                    <li><strong>id</strong> - Unique identifier for the field. Optional. Defaults to
-                        camel case
-                        representation of title.
-                    </li>
-                    <li><strong>type</strong> - Field type. Valid values are `text`, `textarea`,
-                        `switch`,
-                        `radio`, `checkbox`, `select` and `password`. Optional. Defaults to `text`.
-                    </li>
-                    <li><strong>value</strong> - Default value for the field when the form is
-                        displayed.
-                        Optional.
-                    </li>
-                    <li><strong>options</strong> - List of possible options for `radio`, `checkbox`
-                        and
-                        `select`
-                        field types. Options can be specified as an "array of string" or an "array
-                        of
-                        object
-                        with `value` and `label` as keys". Optional.
-                    </li>
-                    <li><strong>required</strong> - Flag to indicate that field input is required.
-                        Optional.
-                        Defaults to false.
-                    </li>
-                    <li><strong>validators</strong> - Array of Angular validation functions (i.e.
-                        ValidatorFn).
-                        Optional.
-                    </li>
-                    <li><strong>asyncValidators</strong> - Array of asynchronous Angular validation
-                        functions
-                        (i.e. AsyncValidatorFn). Optional.
-                    </li>
-                </ul>
             </div>
         </mat-tab>
     </mat-tab-group>

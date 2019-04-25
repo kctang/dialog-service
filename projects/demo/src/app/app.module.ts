@@ -9,6 +9,7 @@ import typescript from 'highlight.js/lib/languages/typescript'
 
 import { MatDialogServiceModule, MdcDialogServiceModule } from 'dialog-service'
 import { FormsModule } from '@angular/forms'
+import { QuickFormModule } from 'ng-quick-form'
 
 export function hljsLanguages () {
   return [
@@ -30,7 +31,8 @@ export function hljsLanguages () {
       languages: hljsLanguages
     }),
     MatDialogServiceModule,
-    MdcDialogServiceModule
+    MdcDialogServiceModule,
+    QuickFormModule
   ],
   bootstrap: [ AppComponent ]
 })
