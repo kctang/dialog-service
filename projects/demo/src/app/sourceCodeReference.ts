@@ -38,7 +38,7 @@ export const sourceCodeReference = {
     '  })\n' +
     ').subscribe()\n',
 
-  fields: 'fields: DialogFormField[] = [\n' +
+  fields: 'fields: QuickFormField[] = [\n' +
     '  {\n' +
     '    title: \'Name\', required: true,\n' +
     '    validators: [\n' +
@@ -187,6 +187,9 @@ export const sourceCodeReference = {
     '  }\n' +
     '}',
 
+  install3: `@import "~common-style-attributes/styles/common-style-attributes";
+@import "~common-style-attributes/styles/csa-typography";`,
+
   sampleData: '{\n' +
     '    \'name\': \'bob\',\n' +
     '    \'programmer?\': true,\n' +
@@ -221,7 +224,7 @@ export const sourceCodeReference = {
 
   apiWithForm: 'withForm (\n' +
     '    title: string,\n' +
-    '    fields: DialogFormField[],\n' +
+    '    fields: QuickFormField[],\n' +
     '    options?: {\n' +
     '        content?: string\n' +
     '        submitButton?: string\n' +

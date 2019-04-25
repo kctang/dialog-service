@@ -6,7 +6,6 @@ import { AlertComponent } from './mat/Alert.component'
 import { MatDialogService } from './MatDialogService'
 import { ProgressComponent } from './mat/Progress.component'
 import { ConfirmComponent } from './mat/Confirm.component'
-import { FormFieldComponent } from './mat/FormField.component'
 import { FormComponent } from './mat/Form.component'
 import {
   MatButtonModule,
@@ -18,21 +17,20 @@ import {
   MatSelectModule,
   MatSlideToggleModule
 } from '@angular/material'
+import { QuickFormModule } from 'ng-quick-form'
 
 @NgModule({
   declarations: [
     AlertComponent,
     ConfirmComponent,
     FormComponent,
-    ProgressComponent,
-    FormFieldComponent
+    ProgressComponent
   ],
   entryComponents: [
     AlertComponent,
     ConfirmComponent,
     FormComponent,
-    ProgressComponent,
-    FormFieldComponent
+    ProgressComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +44,8 @@ import {
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    QuickFormModule
   ],
   providers: [
     MatDialogService,

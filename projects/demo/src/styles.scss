@@ -16,3 +16,6 @@ $mdc-theme-primary: #1565c0; // primary color
 $mdc-theme-secondary: #388e3c; // secondary color
 
 @import "~@angular-mdc/theme/material";
+
+@import "~common-style-attributes/styles/common-style-attributes";
+@import "~common-style-attributes/styles/csa-typography";

@@ -7,17 +7,15 @@
 [Documentation & Demos](https://dialog-service.surge.sh)
 - Create pre-defined modal dialogs without writing Angular component templates.
 - Support for alert, confirmation and progress dialogs.
-- Support for form based dialogs using a high-level form definition abstraction. 
-    - No need to deal with Angular form controls, react to form value changes or layout form fields 
-    in Angular component templates.
-    - Supported field types: text,  textarea,  switch,  radio,  checkbox,  select,  password.
+- Support for form based dialogs using [ng-quick-form](https://ng-quick-form.surge.sh/). 
+    - Simplify usage of Angular forms with Angular Material for common use cases.
     - Supports standard Angular form validators and async validators.
     - Just receive JSON object with validated form values when user submits the form.
 - API Design
     - Simple. Four primary API functions: `withAlert()`, `withProgress()`, `withConfirm()`, `withForm()`.
     - Reactive. Functions return observables with appropriate data to facilitate a more fluent reactive programming pattern.
     - API designed to be UI toolkit agnostic. Currently supports [Angular Material](https://material.angular.io/) 
-    and [Material Web Components for Angular](https://trimox.github.io/angular-mdc-web/#/angular-mdc-web/home).
+    and [Material Web Components for Angular](https://trimox.github.io/angular-mdc-web/#/angular-mdc-web/home) (deprecated).
 
 ## Getting Started
 
@@ -128,7 +126,7 @@ close and return undefined.
 ```typescript
 withForm (
     title: string,
-    fields: DialogFormField[],
+    fields: QuickFormField[],
     options?: {
         content?: string
         submitButton?: string
@@ -141,19 +139,7 @@ DialogService class exposes functions to create alert, confirmation, progress an
 
 The dialog will close and return form values (as a JSON object) when user clicks on submit button 
 (provided all field validation passed).If user cancels the form, the dialog will close and return 
-false. 
-
-`DialogFormField` describes a form field
-with the following properties:
-
-   - **`title`** - Label for the field. Required.
-   - **`id`** - Unique identifier for the field. Optional. Defaults to camel case representation of title.
-   - **`type`** - Field type. Valid values are `text`, `textarea`, `switch`, `radio`, `checkbox`, `select` and `password`. Optional. Defaults to `text`.
-   - **`value`** - Default value for the field when the form is displayed. Optional.
-   - **`options`** - List of possible options for `radio`, `checkbox` and `select` field types. Options can be specified as an "array of string" or an "array of object with `value` and `label` as keys". Optional.
-   - **`required`** - Flag to indicate that field input is required. Optional. Defaults to false.
-   - **`validators`** - Array of Angular validation functions (i.e. ValidatorFn). Optional.
-   - **`asyncValidators`** - Array of asynchronous Angular validation functions (i.e. AsyncValidatorFn). Optional.
+false. For documentation on QuickFormField, refer to [ng-quick-form](https://ng-quick-form.surge.sh/). 
 
 ## Support
 

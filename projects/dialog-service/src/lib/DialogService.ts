@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs'
-import { DialogFormField } from './models/DialogFormField'
+import { QuickFormField } from 'ng-quick-form'
 
 /**
  * The DialogService class exposes functions used to create alert, confirmation, progress and form
@@ -90,7 +90,7 @@ export abstract class DialogService {
    */
   abstract withForm (
     title: string,
-    fields: DialogFormField[],
+    fields: QuickFormField[],
     options?: {
       content?: string
       submitButton?: string
