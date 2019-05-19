@@ -3,11 +3,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+- ...
+
+## [0.1.1] - 2019-05-19
+
 ### Added
 - Scripts to build, serve and publish library.
 
 ### Fixed
 - withForm() does not work on demo site when built with production mode.
+- Prevent whitespace when rendering content.
 
 ## [0.1.0] - 2019-04-25
 
@@ -27,6 +32,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix "Cannot find module '@angular-mdc/web'" ([#1](kctang/dialog-service#1)) 
 
-[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/kctang/dialog-service/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kctang/dialog-service/compare/v0.0.4...v0.1.0
 [0.0.4]: https://github.com/kctang/dialog-service/releases/tag/v0.0.4
