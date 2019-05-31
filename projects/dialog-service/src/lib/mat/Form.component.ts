@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core'
 import { DialogService } from '../DialogService'
 import { BaseFormComponent } from '../BaseFormComponent'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { QuickFormField } from 'ng-quick-form'
 
 // @dynamic

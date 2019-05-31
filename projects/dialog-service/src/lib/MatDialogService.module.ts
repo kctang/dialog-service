@@ -7,16 +7,14 @@ import { MatDialogService } from './MatDialogService'
 import { ProgressComponent } from './mat/Progress.component'
 import { ConfirmComponent } from './mat/Confirm.component'
 import { FormComponent } from './mat/Form.component'
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatInputModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatSlideToggleModule
-} from '@angular/material'
+import { MatButtonModule } from '@angular/material/button'
+import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatInputModule } from '@angular/material/input'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatRadioModule } from '@angular/material/radio'
+import { MatSelectModule } from '@angular/material/select'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { QuickFormModule } from 'ng-quick-form'
 
 @NgModule({

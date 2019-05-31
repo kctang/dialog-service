@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { DialogService } from './DialogService'
-import { MatDialog } from '@angular/material'
+import { MatDialog } from '@angular/material/dialog'
 import { concatMap, finalize, map, tap } from 'rxjs/operators'
 import { AlertComponent } from './mat/Alert.component'
 import { ProgressComponent } from './mat/Progress.component'
