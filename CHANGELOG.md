@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 
 - ...
 
+## [0.1.2] - 2019-05-31
+
+### Changed
+- Update to Angular 8 & Angular Material 8.
+
 ## [0.1.1] - 2019-05-19
 
 ### Added
@@ -32,7 +37,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix "Cannot find module '@angular-mdc/web'" ([#1](kctang/dialog-service#1)) 
 
-[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/kctang/dialog-service/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kctang/dialog-service/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kctang/dialog-service/compare/v0.0.4...v0.1.0
 [0.0.4]: https://github.com/kctang/dialog-service/releases/tag/v0.0.4
