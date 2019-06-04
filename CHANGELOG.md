@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 
 - ...
 
+## [0.1.3] - 2019-06-04
+
+### Changed
+
+- Update minimum version of `ng-quick-form` to 0.0.5.
+- Specify peer dependencies as "supported range" to prevent unnecessary warnings.
+
 ## [0.1.2] - 2019-05-31
 
 ### Changed
@@ -37,7 +44,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix "Cannot find module '@angular-mdc/web'" ([#1](kctang/dialog-service#1)) 
 
-[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/kctang/dialog-service/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kctang/dialog-service/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/kctang/dialog-service/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/kctang/dialog-service/compare/v0.0.4...v0.1.0
