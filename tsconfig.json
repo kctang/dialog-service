@@ -21,11 +21,14 @@
     ],
     "paths": {
       "dialog-service": [
-        "dist/dialog-service"
-      ],
-      "dialog-service/*": [
-        "dist/dialog-service/*"
+        "projects/dialog-service/src/public_api"
       ]
+      //      "dialog-service": [
+      //        "dist/dialog-service"
+      //      ],
+      //      "dialog-service/*": [
+      //        "dist/dialog-service/*"
+      //      ]
     }
   }
 }

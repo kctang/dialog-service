@@ -1,6 +1,6 @@
 {
   "name": "dialog-service",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Reactive Angular modal dialogs. Create alert, confirmation, progress and form based dialogs without writing component templates.",
   "repository": {
     "type": "git",

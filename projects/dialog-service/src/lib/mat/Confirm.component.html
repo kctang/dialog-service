@@ -1,5 +1,7 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
-<div mat-dialog-content *ngIf="data.content">{{data.content}}</div>
+<div mat-dialog-content *ngIf="data.content">
+    <div [innerHtml]="data.content" class="content"></div>
+</div>
 <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{data.acceptButton}}</button>
     <button mat-button [mat-dialog-close]="false">{{data.cancelButton}}</button>
