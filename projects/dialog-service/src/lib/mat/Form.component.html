@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>
     <div *ngIf="data.content" [innerHtml]="data.content" class="content"></div>
-    <form [formGroup]="form" autocomplete="off">
+    <form [formGroup]="form" flex-cell gutter default-cell-12 autocomplete="off">
         <quick-form-field [field]="field" [form]="form"
                           *ngFor="let field of formFields"></quick-form-field>
     </form>

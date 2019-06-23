@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 
 - ...
 
+## [0.1.5] - 2019-06-23
+
+### Changed
+
+- `withForm()` renders fields within form tag with these attributes `flex-cell gutter default-cell-12` to support `layout` properties of form field definitions.
+
 ## [0.1.4] - 2019-06-21
 
 ### Changed
@@ -50,7 +56,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix "Cannot find module '@angular-mdc/web'" ([#1](kctang/dialog-service#1)) 
 
-[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.4...HEAD
+[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.5...HEAD
+[0.1.5]: https://github.com/kctang/dialog-service/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/kctang/dialog-service/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/kctang/dialog-service/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/kctang/dialog-service/compare/v0.1.1...v0.1.2
