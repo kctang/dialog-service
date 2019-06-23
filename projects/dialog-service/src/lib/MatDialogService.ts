@@ -76,6 +76,12 @@ export class MatDialogService extends DialogService {
     submitButton?: string
     cancelButton?: string
     cancelMessage?: string
+    layout?: {
+      flexCell?: boolean | 6 | 12
+      gutter?: boolean
+      growItems?: boolean
+      debug?: boolean
+    }
   }): Observable<any> {
     options = options || {}
     options.submitButton = options.submitButton || 'Submit'

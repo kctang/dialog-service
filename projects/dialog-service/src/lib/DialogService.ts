@@ -85,7 +85,8 @@ export abstract class DialogService {
    * @param fields
    * @param options Dialog options. 'content' represents content to be display in dialog;
    * 'submitButton' represents label to submit form (defaults to 'Submit'); 'cancelButton'
-   * represents label to cancel form (defaults to 'Cancel')
+   * represents label to cancel form (defaults to 'Cancel'); 'layout' defines the form's "flex-cell"
+   * layout attributes;
    * @returns Observable with form value object on submission, or false if form was cancelled
    */
   abstract withForm (
@@ -95,5 +96,11 @@ export abstract class DialogService {
       content?: string
       submitButton?: string
       cancelButton?: string
+      layout?: {
+        flexCell?: boolean | 6 | 12
+        gutter?: boolean
+        growItems?: boolean
+        debug?: boolean
+      }
     }): Observable<any>
 }

@@ -65,18 +65,29 @@ export const sourceCodeReference = {
     '  }\n' +
     ']\n',
 
-  formSimple: 'this.dialogService.withForm(\n' +
-    '  \'Form (Simple)\',\n' +
-    '  [ { title: \'Name\', required: true } ],\n' +
-    '  { content: \'Tell me <b>something</b> about yourself...\' }\n' +
-    ').pipe(\n' +
-    '  filter(result => result),\n' +
-    '  concatMap(result => this.dialogService.withAlert(\n' +
-    '    \'Hello!\',\n' +
-    '    {\n' +
-    '      content: JSON.stringify(result, null, 2)\n' +
-    '    }))\n' +
-    ').subscribe()\n',
+  formSimple: `this.dialogService.withForm(
+      'Form (Simple)',
+      [
+        { title: 'Name', required: true },
+        { title: 'Email', required: true },
+        { title: 'Address', type: 'textarea', required: true, layout: { cell: 8 } }
+      ],
+      {
+        content: 'Tell me <b>something</b> about yourself...',
+        layout: {
+          flexCell: true,
+          gutter: true,
+          growItems: true
+        }
+      }
+    ).pipe(
+      filter(result => result),
+      concatMap(result => this.dialogService.withAlert(
+        'Hello!',
+        {
+          content: JSON.stringify(result, null, 2)
+        }))
+    ).subscribe()`,
 
   formMixed: 'this.dialogService.withForm(\'Form (Mixed with validators)\', this.fields).pipe(\n' +
     '  filter(result => result),\n' +

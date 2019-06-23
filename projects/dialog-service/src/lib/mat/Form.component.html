@@ -1,10 +1,19 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>
     <div *ngIf="data.content" [innerHtml]="data.content" class="content"></div>
-    <form [formGroup]="form" flex-cell gutter default-cell-12 autocomplete="off">
-        <quick-form-field [field]="field" [form]="form"
-                          *ngFor="let field of formFields"></quick-form-field>
-    </form>
+    <div>
+        <form [formGroup]="form"
+              [attr.flex-cell]="attrFlexCell"
+              [attr.gutter]="attrGutter"
+              [attr.grow-items]="attrGrowItems"
+              [attr.default-cell-6]="attrDefaultCell6"
+              [attr.default-cell-12]="attrDefaultCell12"
+              [attr.debug]="attrDebug"
+              autocomplete="off">
+            <quick-form-field [field]="field" [form]="form"
+                              *ngFor="let field of formFields"></quick-form-field>
+        </form>
+    </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button color="primary" type="button"

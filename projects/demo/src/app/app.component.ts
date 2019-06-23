@@ -72,8 +72,19 @@ export class AppComponent {
   doFormSimple () {
     this.dialogService.withForm(
       'Form (Simple)',
-      [ { title: 'Name', required: true } ],
-      { content: 'Tell me <b>something</b> about yourself...' }
+      [
+        { title: 'Name', required: true },
+        { title: 'Email', required: true },
+        { title: 'Address', type: 'textarea', required: true, layout: { cell: 8 } }
+      ],
+      {
+        content: 'Tell me <b>something</b> about yourself...',
+        layout: {
+          flexCell: true,
+          gutter: true,
+          growItems: true
+        }
+      }
     ).pipe(
       filter(result => result),
       concatMap(result => this.dialogService.withAlert(

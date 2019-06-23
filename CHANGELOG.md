@@ -5,11 +5,17 @@ All notable changes to this project will be documented in this file.
 
 - ...
 
+## [0.1.6] - 2019-06-23
+
+### Added
+
+- Proper `flex-cell` layout configuration when using forms via `withForm()`. It supports an optional `layout` property with options to configure `flexCell`, `gutter`, `growItems`, `debug`.
+
 ## [0.1.5] - 2019-06-23
 
 ### Changed
 
-- `withForm()` renders fields within form tag with these attributes `flex-cell gutter default-cell-12` to support `layout` properties of form field definitions.
+- `withForm()` renders fields within form tag with these attributes `flex-cell gutter default-cell-12` to support `layout` properties of form field definitions (quick hack, not ideal).
 
 ## [0.1.4] - 2019-06-21
 
