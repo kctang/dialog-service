@@ -3,6 +3,8 @@ import { DialogService } from '../DialogService'
 import { BaseFormComponent } from '../BaseFormComponent'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { QuickFormField } from 'ng-quick-form'
+import { Subject } from 'rxjs'
+import { FormGroup } from '@angular/forms'
 
 // @dynamic
 @Component({
@@ -28,9 +30,10 @@ export class FormComponent extends BaseFormComponent {
         growItems?: boolean
         debug?: boolean
       }
+      valueChanges?: Subject<{ value: any, form: FormGroup }>
     }
   ) {
-    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields)
+    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields, data.valueChanges)
   }
 
   get attrFlexCell () {

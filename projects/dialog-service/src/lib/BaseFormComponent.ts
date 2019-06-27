@@ -1,10 +1,11 @@
 import { FormGroup } from '@angular/forms'
-import { ChangeDetectorRef } from '@angular/core'
+import { ChangeDetectorRef, OnDestroy } from '@angular/core'
 import { DialogService } from './DialogService'
-import { filter, startWith, take, tap } from 'rxjs/operators'
+import { debounceTime, filter, startWith, take, tap } from 'rxjs/operators'
 import { assert } from './util/assert'
 import { QuickForm, QuickFormField } from 'ng-quick-form'
 import { markAllAsDirtyAndTouched } from './util/markAllAsDirtyAndTouched'
+import { Subject, Subscription } from 'rxjs'
 
 type Closeable = {
   close: (result: any) => void
@@ -13,18 +14,27 @@ type Closeable = {
 /**
  * Manage form creation and submission.
  */
-export class BaseFormComponent {
+export class BaseFormComponent implements OnDestroy {
   submitted = false
   form: FormGroup
+  formSubscription?: Subscription
 
   constructor (
     private cd: ChangeDetectorRef,
     private dialogService: DialogService,
     private closeable: Closeable,
     private cancelMessage: string,
-    public formFields: QuickFormField[]
+    public formFields: QuickFormField[],
+    private valueChanges?: Subject<{ value: any, form: FormGroup }>
   ) {
     this.form = QuickForm.makeForm(this.formFields)
+
+    if (this.valueChanges) {
+      this.formSubscription = this.form.valueChanges.pipe(
+        debounceTime(100),
+        tap(value => this.valueChanges!.next({ value, form: this.form }))
+      ).subscribe()
+    }
   }
 
   doClose () {
@@ -61,5 +71,11 @@ export class BaseFormComponent {
 
     // close form dialog, return form value object as result
     this.closeable.close(QuickForm.preProcessFormValues(this.form.value))
+  }
+
+  ngOnDestroy (): void {
+    if (this.formSubscription) {
+      this.formSubscription.unsubscribe()
+    }
   }
 }

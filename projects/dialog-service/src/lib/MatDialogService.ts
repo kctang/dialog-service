@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { DialogService } from './DialogService'
 import { MatDialog } from '@angular/material/dialog'
 import { concatMap, finalize, map, tap } from 'rxjs/operators'
@@ -8,6 +8,7 @@ import { ProgressComponent } from './mat/Progress.component'
 import { ConfirmComponent } from './mat/Confirm.component'
 import { FormComponent } from './mat/Form.component'
 import { QuickFormField } from 'ng-quick-form'
+import { FormGroup } from '@angular/forms'
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,7 @@ export class MatDialogService extends DialogService {
       gutter?: boolean
       growItems?: boolean
       debug?: boolean
+      valueChanges?: Subject<{ value: any, form: FormGroup }>
     }
   }): Observable<any> {
     options = options || {}

@@ -1,5 +1,6 @@
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { QuickFormField } from 'ng-quick-form'
+import { FormGroup } from '@angular/forms'
 
 /**
  * The DialogService class exposes functions used to create alert, confirmation, progress and form
@@ -83,9 +84,12 @@ export abstract class DialogService {
    *
    * @param title
    * @param fields
-   * @param options Dialog options. 'content' represents content to be display in dialog;
-   * 'submitButton' represents label to submit form (defaults to 'Submit'); 'cancelButton'
-   * represents label to cancel form (defaults to 'Cancel'); 'layout' defines the form's "flex-cell"
+   * @param options Dialog options.
+   *  - 'content' represents content to be display in dialog;
+   *  - 'submitButton' represents label to submit form (defaults to 'Submit');
+   *  - 'cancelButton' represents label to cancel form (defaults to 'Cancel');
+   *  - 'layout' defines the form's "flex-cell";
+   *  - 'valueChanges' is used to receive form value change (experimental)
    * layout attributes;
    * @returns Observable with form value object on submission, or false if form was cancelled
    */
@@ -101,6 +105,7 @@ export abstract class DialogService {
         gutter?: boolean
         growItems?: boolean
         debug?: boolean
-      }
+      },
+      valueChanges?: Subject<{ value: any, form: FormGroup }>
     }): Observable<any>
 }
