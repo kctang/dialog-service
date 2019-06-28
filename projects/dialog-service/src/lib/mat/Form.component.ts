@@ -30,10 +30,12 @@ export class FormComponent extends BaseFormComponent {
         growItems?: boolean
         debug?: boolean
       }
-      valueChanges?: Subject<{ value: any, form: FormGroup }>
+      valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>,
+      formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
     }
   ) {
-    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields, data.valueChanges)
+    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields, data.valueChanges,
+      data.formCreated)
   }
 
   get attrFlexCell () {

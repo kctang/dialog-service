@@ -25,14 +25,20 @@ export class BaseFormComponent implements OnDestroy {
     private closeable: Closeable,
     private cancelMessage: string,
     public formFields: QuickFormField[],
-    private valueChanges?: Subject<{ value: any, form: FormGroup }>
+    private valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>,
+    private formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
   ) {
     this.form = QuickForm.makeForm(this.formFields)
 
+    if (formCreated) {
+      formCreated(this.form, this.cd)
+    }
     if (this.valueChanges) {
       this.formSubscription = this.form.valueChanges.pipe(
         debounceTime(100),
-        tap(value => this.valueChanges!.next({ value, form: this.form }))
+        tap(value => this.valueChanges!.next({
+          value, form: this.form, cd
+        }))
       ).subscribe()
     }
   }

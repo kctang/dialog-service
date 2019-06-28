@@ -8,6 +8,10 @@ import { AlertComponent } from './mdc/Alert.component'
 import { ConfirmComponent } from './mdc/Confirm.component'
 import { QuickFormField } from 'ng-quick-form'
 
+/**
+ * @deprecated No longer supported. Not enough time to maintain this implementation, contributions
+ * welcomed.
+ */
 @Injectable({
   providedIn: 'root'
 })

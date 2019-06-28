@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { ChangeDetectorRef, Injectable } from '@angular/core'
 import { Observable, Subject } from 'rxjs'
 import { DialogService } from './DialogService'
 import { MatDialog } from '@angular/material/dialog'
@@ -82,8 +82,9 @@ export class MatDialogService extends DialogService {
       gutter?: boolean
       growItems?: boolean
       debug?: boolean
-      valueChanges?: Subject<{ value: any, form: FormGroup }>
-    }
+    },
+    valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>
+    formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
   }): Observable<any> {
     options = options || {}
     options.submitButton = options.submitButton || 'Submit'
