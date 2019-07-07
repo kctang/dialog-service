@@ -90,6 +90,7 @@ export abstract class DialogService {
    *  - 'submitButton' represents label to submit form (defaults to 'Submit');
    *  - 'cancelButton' represents label to cancel form (defaults to 'Cancel');
    *  - 'layout' defines the form's layout attributes (uses "flex-cell");
+   *  - 'rawValue' is used to get form raw value. Default is false.
    *  - 'valueChanges' is used to receive form value change (experimental)
    *  - 'formCreated' if specified, this callback function is called when the form is created. It
    *      let user perform post FormGroup creation processing (experimental). e.g. to listen to
@@ -109,6 +110,7 @@ export abstract class DialogService {
         growItems?: boolean
         debug?: boolean
       },
+      rawValue?: boolean,
       valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>
       formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
     }): Observable<any>

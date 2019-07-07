@@ -24,6 +24,7 @@ export class FormComponent extends BaseFormComponent {
       submitButton: string
       cancelButton: string
       cancelMessage: string
+      rawValue: boolean
       layout?: {
         flexCell?: boolean | 6 | 12
         gutter?: boolean
@@ -34,8 +35,8 @@ export class FormComponent extends BaseFormComponent {
       formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
     }
   ) {
-    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields, data.valueChanges,
-      data.formCreated)
+    super(cd, dialogService, dialogRef, data.cancelMessage, data.fields,
+      data.rawValue, data.valueChanges, data.formCreated)
   }
 
   get attrFlexCell () {

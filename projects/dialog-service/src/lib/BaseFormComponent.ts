@@ -25,6 +25,7 @@ export class BaseFormComponent implements OnDestroy {
     private closeable: Closeable,
     private cancelMessage: string,
     public formFields: QuickFormField[],
+    private rawValue: boolean,
     private valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>,
     private formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
   ) {
@@ -76,7 +77,8 @@ export class BaseFormComponent implements OnDestroy {
     }
 
     // close form dialog, return form value object as result
-    this.closeable.close(QuickForm.preProcessFormValues(this.form.value))
+    this.closeable.close(QuickForm.preProcessFormValues(
+      this.rawValue ? this.form.getRawValue() : this.form.value))
   }
 
   ngOnDestroy (): void {
