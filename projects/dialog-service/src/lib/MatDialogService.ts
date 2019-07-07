@@ -77,6 +77,7 @@ export class MatDialogService extends DialogService {
     submitButton?: string
     cancelButton?: string
     cancelMessage?: string
+    rawValue?: boolean
     layout?: {
       flexCell?: boolean | 6 | 12
       gutter?: boolean
@@ -90,6 +91,7 @@ export class MatDialogService extends DialogService {
     options.submitButton = options.submitButton || 'Submit'
     options.cancelButton = options.cancelButton || 'Cancel'
     options.cancelMessage = options.cancelMessage || 'Cancel?'
+    options.rawValue = options.rawValue || false
 
     const ref = this.dialog.open(FormComponent, {
       disableClose: true,
