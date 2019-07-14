@@ -18,13 +18,18 @@ export class MatDialogService extends DialogService {
     super()
   }
 
-  withProgress<T = any> (work: Observable<T>, title?: string): Observable<T | undefined> {
+  withProgress<T = any> (
+    work: Observable<T>, title?: string,
+    options?: {
+      dialogOptions?: { [ key: string ]: any }
+    }): Observable<T | undefined> {
     title = title || 'Please Wait...'
     let workOutput: T
 
     const ref = this.dialog.open(ProgressComponent, {
       disableClose: true,
-      data: { title }
+      data: { title },
+      ...(options && options.dialogOptions || {})
     })
 
     ref.afterOpened().pipe(
@@ -38,14 +43,19 @@ export class MatDialogService extends DialogService {
     )
   }
 
-  withAlert (title: string, options?: { content?: string, acceptButton?: string }): Observable<boolean> {
+  withAlert (title: string, options?: {
+    content?: string
+    acceptButton?: string
+    dialogOptions?: { [ key: string ]: any }
+  }): Observable<boolean> {
     options = options || {}
     options.acceptButton = options.acceptButton || 'OK'
 
     const dialogRef = this.dialog.open(AlertComponent, {
       disableClose: true,
       minWidth: 200,
-      data: { title, ...options }
+      data: { title, ...options },
+      ...(options && options.dialogOptions || {})
     })
 
     return dialogRef.afterClosed().pipe(
@@ -57,6 +67,7 @@ export class MatDialogService extends DialogService {
     content?: string
     acceptButton?: string
     cancelButton?: string
+    dialogOptions?: { [ key: string ]: any }
   }): Observable<boolean> {
     title = title || 'Confirm?'
     options = options || {}
@@ -65,7 +76,8 @@ export class MatDialogService extends DialogService {
 
     const ref = this.dialog.open(ConfirmComponent, {
       disableClose: true,
-      data: { title, ...options }
+      data: { title, ...options },
+      ...(options && options.dialogOptions || {})
     })
     return ref.afterClosed().pipe(
       map(result => result)
@@ -86,6 +98,7 @@ export class MatDialogService extends DialogService {
     },
     valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>
     formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
+    dialogOptions?: { [ key: string ]: any }
   }): Observable<any> {
     options = options || {}
     options.submitButton = options.submitButton || 'Submit'
@@ -95,7 +108,8 @@ export class MatDialogService extends DialogService {
 
     const ref = this.dialog.open(FormComponent, {
       disableClose: true,
-      data: { title, fields, ...options }
+      data: { title, fields, ...options },
+      ...(options && options.dialogOptions || {})
     })
 
     return ref.afterClosed()

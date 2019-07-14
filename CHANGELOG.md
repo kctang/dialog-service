@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 
 - ...
 
+## [0.1.10] - 2019-07-14
+
+### Added
+
+- Ability to configureMatDialogConfig options via `dialogOptions`. 
+
+## [0.1.9] - 2019-07-07
+
+### Added
+
+- Add ability to retrieve form raw value.
+
 ## [0.1.8] - 2019-06-28
 
 ### Added
@@ -74,7 +86,9 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fix "Cannot find module '@angular-mdc/web'" ([#1](kctang/dialog-service#1)) 
 
-[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.8...HEAD
+[Unreleased]: https://github.com/kctang/dialog-service/compare/v0.1.10...HEAD
+[0.1.10]: https://github.com/kctang/dialog-service/compare/v0.1.9...v0.1.10
+[0.1.9]: https://github.com/kctang/dialog-service/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/kctang/dialog-service/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/kctang/dialog-service/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/kctang/dialog-service/compare/v0.1.5...v0.1.6

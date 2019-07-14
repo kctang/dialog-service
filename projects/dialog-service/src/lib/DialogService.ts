@@ -17,8 +17,14 @@ export abstract class DialogService {
    *
    * @param work Observable workload
    * @param title Dialog title (defaults to 'Please Wait...')
+   * @param options Dialog options. 'dialogOptions' are options that will be passed to underlying
+   * dialog implementation (i.e. Angular Material). It provides a way to supply options to
+   * MatDialogConfig.
    */
-  abstract withProgress<T = any> (work: Observable<T>, title?: string): Observable<T | undefined>
+  abstract withProgress<T = any> (work: Observable<T>, title?: string,
+                                  options?: {
+                                    dialogOptions?: { [ key: string ]: any }
+                                  }): Observable<T | undefined>
 
   /**
    * Display alert dialog.
@@ -33,6 +39,7 @@ export abstract class DialogService {
     options?: {
       content?: string
       acceptButton?: string
+      dialogOptions?: { [ key: string ]: any }
     }
   ): Observable<boolean>
 
@@ -52,6 +59,7 @@ export abstract class DialogService {
       acceptButton?: string
       cancelButton?: string
       cancelMessage?: string
+      dialogOptions?: { [ key: string ]: any }
     }
   ): Observable<boolean>
 
@@ -113,5 +121,6 @@ export abstract class DialogService {
       rawValue?: boolean,
       valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>
       formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
+      dialogOptions?: { [ key: string ]: any }
     }): Observable<any>
 }

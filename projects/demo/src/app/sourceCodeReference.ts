@@ -212,14 +212,14 @@ export const sourceCodeReference = {
 
   apiWithProgress: 'withProgress<T = any> (\n' +
     '  work: Observable<T>\n' +
-    '  title?: string // defaults to \'Please Wait...\'\n' +
+    '  title?: string // defaults to \'Please Wait...\'\n  dialogOptions?: { [ key: string ]: any }\n' +
     '): Observable<T | undefined>',
 
   apiWithAlert: 'withAlert (\n' +
     '    title: string,\n' +
     '    options?: {\n' +
     '        content?: string\n' +
-    '        acceptButton?: string // defaults to \'OK\'\n' +
+    '        acceptButton?: string // defaults to \'OK\'\n        dialogOptions?: { [ key: string ]: any }\n' +
     '    }\n' +
     '): Observable<boolean>',
 
@@ -229,19 +229,28 @@ export const sourceCodeReference = {
     '      content?: string\n' +
     '      acceptButton?: string   // defaults to \'Yes\'\n' +
     '      cancelButton?: string   // defaults to \'No\n' +
-    '      cancelMessage?: string  // defaults to \'Cancel?\'\n' +
+    '      cancelMessage?: string  // defaults to \'Cancel?\'\n      dialogOptions?: { [ key: string ]: any }\n' +
     '    }\n' +
     '): Observable<boolean>',
 
-  apiWithForm: 'withForm (\n' +
-    '    title: string,\n' +
-    '    fields: QuickFormField[],\n' +
-    '    options?: {\n' +
-    '        content?: string\n' +
-    '        submitButton?: string\n' +
-    '        cancelButton?: string\n' +
-    '    }\n' +
-    '): Observable<any>',
+  apiWithForm: `withForm (
+  title: string,
+  fields: QuickFormField[],
+  options?: {
+    content?: string
+    submitButton?: string
+    cancelButton?: string
+    layout?: {
+      flexCell?: boolean | 6 | 12
+      gutter?: boolean
+      growItems?: boolean
+      debug?: boolean
+    },
+    rawValue?: boolean,
+    valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>
+    formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
+    dialogOptions?: { [ key: string ]: any }
+}): Observable<any>`,
 
   requirement1: 'withConfirm(\'Forgot Username\', { content: \'Are you a registered user?\' })',
   requirement2: 'withForm(\'What is your email?\',[ { title: \'Email\' } ])',
