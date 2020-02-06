@@ -3,7 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-- ...
+### Removed
+
+- Remove code and dependencies for Angular Material Web Component. 
 
 ## [0.2.0] - 2020-02-06
 

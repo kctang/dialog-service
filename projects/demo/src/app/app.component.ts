@@ -2,18 +2,14 @@ import { Component } from '@angular/core'
 import { of } from 'rxjs'
 import { concatMap, delay, filter, map, tap } from 'rxjs/operators'
 import { AsyncValidatorFn, Validators } from '@angular/forms'
-import {
-  MatDialogService,
-  MdcDialogService,
-  DialogService
-} from 'dialog-service'
+import { MatDialogService, DialogService } from 'dialog-service'
 import { CheckboxValidators, QuickFormField } from 'ng-quick-form'
 import { sourceCodeReference } from './sourceCodeReference'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.scss' ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   source = sourceCodeReference
@@ -30,27 +26,26 @@ export class AppComponent {
     { title: 'Programmer?', type: 'switch' },
     {
       title: 'Experience in', type: 'checkbox',
-      options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ],
-      validators: [ CheckboxValidators.minSelectedValues(2) ]
+      options: ['React', 'Angular', 'Vue', 'Ember.js', 'jQuery'],
+      validators: [CheckboxValidators.minSelectedValues(2)]
     },
     {
       title: 'Prefers', type: 'radio', required: true,
-      options: [ 'React', 'Angular', 'Vue', 'Ember.js', 'jQuery' ]
+      options: ['React', 'Angular', 'Vue', 'Ember.js', 'jQuery']
     },
     {
       title: 'Comments', type: 'textarea'
     },
     {
       title: 'Category', type: 'select', required: true,
-      options: [ 'Category 1', 'Category 2', 'Category 3' ]
+      options: ['Category 1', 'Category 2', 'Category 3']
     }
   ]
 
   // NOTE: normally, we should inject "DialogService" instead of actual implementation
   // MatDialogService and MdcDialogService should never be imported into your application directly
   constructor (
-    private matDialogService: MatDialogService,
-    private mdcDialogService: MdcDialogService) {
+    private matDialogService: MatDialogService) {
   }
 
   doAlert () {
@@ -122,7 +117,7 @@ export class AppComponent {
           Validators.minLength(3),
           Validators.maxLength(10)
         ],
-        asyncValidators: [ slowNameCheck ]
+        asyncValidators: [slowNameCheck]
       },
       ...this.fields.slice(1)
     ]
@@ -194,7 +189,7 @@ export class AppComponent {
       filter(registeredUser => registeredUser === true),
       concatMap(() => this.dialogService.withForm(
         'What is your email?',
-        [ { title: 'Email' } ],
+        [{ title: 'Email' }],
         { content: 'Try <i>bob@gmail.com</i>' }
       )),
       filter(formValues => formValues !== false),
@@ -207,10 +202,6 @@ export class AppComponent {
   }
 
   get dialogService (): DialogService {
-    if (this.uiLibrary === 'mat') {
-      return this.matDialogService
-    } else {
-      return this.mdcDialogService
-    }
+    return this.matDialogService
   }
 }
