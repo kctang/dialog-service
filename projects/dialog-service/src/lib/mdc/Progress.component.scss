@@ -1,8 +1,0 @@
-// hide 'required' dialog button to workaround focus-trap error
-button[mdcDialogButton] {
-  opacity: 0;
-}
-
-mdc-dialog-actions {
-  margin-top: -48px;
-}
