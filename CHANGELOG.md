@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.1] - 2020-02-07
+
+### Changed
+
+- Update Angular to ~9.0.0.
+
 ### Removed
 
 - Remove code and dependencies for Angular Material Web Component. 
