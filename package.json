@@ -24,7 +24,7 @@
     "common-style-attributes": "^0.1.1",
     "core-js": "^2.6.11",
     "highlight.js": "^9.18.1",
-    "ng-quick-form": "^0.1.1",
+    "ng-quick-form": "^0.1.3",
     "ngx-highlightjs": "^3.0.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

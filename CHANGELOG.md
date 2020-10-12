@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.2] - 2020-10-12
+
+- Remove Angular version upper limit.
+
 ## [0.2.1] - 2020-02-07
 
 ### Changed
