@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.3] - 2020-10-13
+
+- Update `content` for alert, confirm and form dialog to allow custom styling.
+
 ## [0.2.2] - 2020-10-12
 
 - Remove Angular version upper limit.

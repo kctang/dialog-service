@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core'
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core'
 import { DialogService } from '../DialogService'
 import { BaseFormComponent } from '../BaseFormComponent'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { QuickFormField } from 'ng-quick-form'
 import { Subject } from 'rxjs'
 import { FormGroup } from '@angular/forms'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 // @dynamic
 @Component({
@@ -12,7 +13,9 @@ import { FormGroup } from '@angular/forms'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class FormComponent extends BaseFormComponent {
+export class FormComponent extends BaseFormComponent implements OnInit {
+  safeContent?: SafeHtml
+
   constructor (
     cd: ChangeDetectorRef,
     dialogRef: MatDialogRef<FormComponent>,
@@ -33,10 +36,17 @@ export class FormComponent extends BaseFormComponent {
       }
       valueChanges?: Subject<{ value: any, form: FormGroup, cd: ChangeDetectorRef }>,
       formCreated?: (form: FormGroup, cd: ChangeDetectorRef) => void
-    }
+    },
+    private sanitize: DomSanitizer
   ) {
     super(cd, dialogService, dialogRef, data.cancelMessage, data.fields,
       data.rawValue, data.valueChanges, data.formCreated)
+  }
+
+  ngOnInit (): void {
+    if (this.data.content) {
+      this.safeContent = this.sanitize.bypassSecurityTrustHtml(this.data.content)
+    }
   }
 
   get attrFlexCell () {
